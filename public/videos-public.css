@@ -1,0 +1,366 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background:repeating-linear-gradient(burlywood,cyan);
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-bottom: 30px;
+}
+/*Contenedores*/
+/* ancho del dashboard */ /*contenedor de formulario y tabla */
+.container {
+  display: flex; /* Diseño de dos columnas */
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  gap: 20px; /* Espacio entre la barra lateral y el contenido principal */
+  background:repeating-linear-gradient(burlywood,cyan);
+}
+
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  color:blue;
+}
+
+
+/* Barra lateral izquierda aca estan los filtros */
+.sidebar {
+  flex: 1; /* Ocupa 1 parte del espacio */
+  max-width: 300px; /* Ancho máximo de la barra lateral */
+  background:transparent;
+  padding: 10px;
+  border: 0px solid #ddd;
+  border-radius: 8px;
+  margin-left: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 50%;
+  text-align: center;
+  align-self: center;
+ 
+}
+
+.sidebar h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: blue;
+  
+}
+
+.sidebar label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: blue;
+}
+
+.sidebar input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  
+}
+
+.sidebar button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+ 
+  
+}
+
+.sidebar button:hover {
+  background-color: #0056b3;
+}
+
+.sidebar .filters {
+  margin-top: 20px;
+}
+
+.sidebar select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid cyan;
+  border-radius: 4px;
+  color: #0056b3;
+}
+.sidebar select:hover {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid cyan;
+  border-radius: 4px;
+  color: blueviolet;
+}
+
+/* Contenido principal (videos) */
+.content {
+  flex: 2; /* Ocupa 2 partes del espacio */
+  background:-moz-linear-gradient(cyan,burlywood);
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ 
+  
+}
+.content table{
+  align-content: center;
+}
+
+#videos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: #0056b3;
+}
+
+.video-card {
+  flex: 1 1 calc(33.33% - 40px); /* Tres tarjetas por fila */
+  padding: 15px;
+  background-color: burlywood;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  height: 50%;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+}
+
+.video-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.video-card button {
+  margin-right: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.video-card button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para el modal */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 400px;
+}
+
+.modal h2 {
+  margin: 0 0 15px 0;
+  font-size: 20px;
+}
+
+.modal form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.modal form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal form button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal form button:hover {
+  background-color: #0056b3;
+}
+/*dashboard */ /*contiene la tabla y una capa mas */
+#videos {
+  flex: 2; /* La tabla ocupa 2 partes del espacio */
+  background:linear-gradient(burlywood,cyan);
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  min-width: 500px;
+  min-height: 500px;
+  max-height: 500px;
+  max-width: 500px;
+  overflow-y: auto; /* Barra de desplazamiento vertical */
+  margin-left: 50px;
+  
+}
+
+
+#videos div {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: transparent;
+  width: 100%;
+  height: 95%;
+  align-content: top;
+}
+
+
+/* Estilo general para la tabla */
+#videos table {
+  /*width: 100%; /* La tabla ocupa todo el ancho disponible */
+  width: 400px;
+  height: 400px;
+  border-collapse: collapse; /* Une los bordes de las celdas */
+  border-width: medium;
+  /*text-align: left;*/
+  font-family: 'Courier New', Courier, monospace;
+  background:linear-gradient(white,cyan)
+
+}
+#videos table td {
+ 
+  border: 1px solid #ddd; /* Grosor y color del borde de las celdas */
+  padding: 8px; /* Espaciado interno dentro de las celdas */
+  vertical-align: top; /* Alinea el contenido hacia arriba */
+
+ 
+}
+
+
+/* Estilo para la columna de etiquetas */
+#videos td:nth-child(1) {
+  width: 50%; /* Las etiquetas ocupan el 25% del ancho total */
+  color: #007bff;
+}
+/* Estilo para la columna de variables o contenido video.id,video.desc_vd1,video.video1 */
+#videos td:nth-child(2) {
+  width: 50%; /* Las etiquetas ocupan el 25% del ancho total */
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Estilo para desc_vd1  */
+#videos table tr:nth-child(1) {
+ align-content: center;
+ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ text-align: left;
+  
+}
+/* Estilo para fecha su fila */
+#videos tr:nth-child(2) {
+  height: 50px; /* Las etiquetas ocupan el 25% del ancho total */
+  text-align: left;
+}
+/* Estilo para video1 su fila */
+#videos tr:nth-child(3) {
+  height: 50px; /* Las etiquetas ocupan el 25% del ancho total */
+  text-align: center;
+  
+}
+/* Estilo para fila de video1 */
+#videos button {
+  width: 125px;
+  align-content: center;
+}
+/* Estilo general para la celda */
+td {
+  position: relative; /* Necesario para posicionar el tooltip */
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+
+/* Estilo del tooltip */
+.tooltip {
+  visibility: hidden; /* Oculto por defecto */
+  background-color: #333; /* Color de fondo */
+  color: #fff; /* Color del texto */
+  text-align: left; /* Alineación izquierda (mejor para contenido largo) */
+  border-radius: 4px;
+  padding: 8px; /* Espaciado interno */
+  font-size: 12px;
+
+  /* Ancho y altura sin restricciones */
+  max-width: none; /* Sin límite de ancho */
+  max-height: none; /* Sin límite de altura */
+  white-space: normal; /* Permite saltos de línea */
+  word-wrap: break-word; /* Rompe palabras largas si es necesario */
+  overflow: visible; /* Evita ocultar contenido que excede */
+
+  /* Posición del tooltip */
+  position: absolute;
+  top: 0px; /* Encima de la celda */
+  left: 50%; /* Centrado horizontalmente */
+  transform: translateX(-50%); /* Ajuste fino */
+  z-index: 10; /* Asegura que esté encima de otros elementos */
+
+  /* Animación suave */
+  opacity: 0; /* Totalmente transparente */
+  transition: opacity 0.3s ease-in-out; /* Animación suave */
+}
+
+/* Mostrar el tooltip al pasar el cursor */
+td:hover .tooltip {
+  visibility: visible; /* Visible al pasar el cursor */
+  opacity: 1; /* Totalmente opaco */
+}
+
+/* Estilo para truncar texto en las celdas */
+td {
+  position: relative; /* Necesario para posicionar el tooltip */
+  max-width: 200px; /* Ancho máximo de la celda (ajustable) */
+  white-space: nowrap; /* Evita saltos de línea */
+  overflow: hidden; /* Oculta el contenido que excede */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos (...) */
+  padding: 8px;
+  border: 1px solid #ddd;
+}

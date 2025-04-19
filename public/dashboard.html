@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Bienvenido al Dashboard</h1>
+  <nav>
+    <ul>
+      <li><a href="/videos-private.html">Administrar Videos</a></li>
+      <li><a href="/motos-private.html">Administrar motos</a></li>
+      <li><a href="/gestion-usuarios.html">Gestión de Usuarios</a></li>
+      <li><button id="logoutButton">Cerrar Sesión</button></li>
+    </ul>
+  </nav>
+
+  <script>
+    // Cerrar sesión
+    document.getElementById('logoutButton').addEventListener('click', async () => {
+      try {
+        const response = await fetch('/auth/logout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert('Sesión cerrada.');
+          window.location.href = '/login.html';
+        } else {
+          alert(result.message || 'Error al cerrar sesión.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Ocurrió un error al cerrar sesión.');
+      }
+    });
+  </script>
+</body>
+</html>

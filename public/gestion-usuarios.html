@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Usuarios</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2 ><a href="/index.html">Regresar</a></h2>
+  <h1>Gestión de Usuarios</h1>
+
+  <!-- Formulario para agregar un nuevo usuario -->
+  <form id="addUserForm">
+    <h2>Agregar Usuario</h2>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    <label for="clave">Contraseña:</label>
+    <input type="password" id="clave" name="clave" required>
+    <button type="submit">Agregar Usuario</button>
+  </form>
+
+  <!-- Lista de usuarios -->
+  <h2>Lista de Usuarios</h2>
+  <div id="users-list"></div>
+
+  <!-- Modal para editar un usuario -->
+  <div class="overlay" id="overlay"></div>
+  <div class="modal" id="editModal">
+    <h2>Editar Usuario</h2>
+    <form id="editUserForm">
+      <label for="editNombre">Nombre:</label>
+      <input type="text" id="editNombre" name="nombre">
+      <label for="editClave">Nueva Contraseña:</label>
+      <input type="password" id="editClave" name="clave" placeholder="Deja en blanco para no cambiar">
+      <button type="submit">Guardar Cambios</button>
+      <button type="button" onclick="closeModal()">Cancelar</button>
+    </form>
+  </div>
+
+  <script>
+    let currentUserId = null;
+
+    // Cargar los usuarios existentes
+    async function loadUsers() {
+      try {
+        const response = await fetch('/api/usuarios');
+        if (!response.ok) throw new Error('Error al cargar los usuarios.');
+        const users = await response.json();
+
+        const usersContainer = document.getElementById('users-list');
+        usersContainer.innerHTML = '';
+        if (users.length > 0) {
+          users.forEach(user => {
+            const userElement = document.createElement('div');
+            userElement.innerHTML = `
+              <p><strong>${user.nombre}</strong></p>
+              <button onclick="openEditModal(${user.id}, '${user.nombre}')">Editar</button>
+              <button onclick="deleteUser(${user.id})">Eliminar</button>
+            `;
+            usersContainer.appendChild(userElement);
+          });
+        } else {
+          usersContainer.innerHTML = '<p>No hay usuarios disponibles.</p>';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('users-list').innerHTML = '<p>Ocurrió un error al cargar los usuarios.</p>';
+      }
+    }
+
+    // Agregar un nuevo usuario
+    document.getElementById('addUserForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('/api/usuarios', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (result.id) {
+          alert('Usuario agregado exitosamente.');
+          loadUsers(); // Recargar los usuarios para mostrar el nuevo usuario
+        } else {
+          alert(result.error || 'Error al agregar el usuario.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Ocurrió un error al agregar el usuario.');
+      }
+    });
+
+    // Abrir el modal de edición
+    function openEditModal(id, nombre) {
+      currentUserId = id;
+      document.getElementById('editNombre').value = nombre;
+      document.getElementById('editClave').value = ''; // Limpiar la contraseña
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('editModal').style.display = 'block';
+    }
+
+    // Cerrar el modal de edición
+    function closeModal() {
+      currentUserId = null;
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    // Editar un usuario existente
+    document.getElementById('editUserForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      // Si la contraseña está vacía, no enviarla al backend
+      if (!data.clave) {
+        delete data.clave;
+      }
+
+      try {
+        const response = await fetch(`/api/usuarios/${currentUserId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert('Usuario actualizado exitosamente.');
+          closeModal();
+          loadUsers(); // Recargar los usuarios para reflejar los cambios
+        } else {
+          alert(result.error || 'Error al actualizar el usuario.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Ocurrió un error al actualizar el usuario.');
+      }
+    });
+
+    // Eliminar un usuario
+    async function deleteUser(id) {
+      if (!confirm('¿Estás seguro de que quieres eliminar este usuario?')) return;
+
+      try {
+        const response = await fetch(`/api/usuarios/${id}`, {
+          method: 'DELETE',
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert('Usuario eliminado exitosamente.');
+          loadUsers(); // Recargar los usuarios para reflejar los cambios
+        } else {
+          alert(result.error || 'Error al eliminar el usuario.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Ocurrió un error al eliminar el usuario.');
+      }
+    }
+
+    // Cargar los usuarios al cargar la página
+    loadUsers();
+  </script>
+</body>
+</html>

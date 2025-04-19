@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Videos Públicos</title>
+  <link rel="stylesheet" href="videos.css"> <!-- Vinculamos el archivo CSS -->
+</head>
+<body>
+  <h2 ><a href="/index.html">Regresar</a></h2>
+  <h1>Videos administrador</h1>
+
+  <!-- Contenedor principal con diseño de dos columnas -->
+  <div class="container">
+    <!-- Barra lateral izquierda -->
+    <aside class="sidebar">
+      <!-- Formulario para agregar un nuevo video -->
+      <form id="addVideoForm" class="sidebar-form">
+        <button type="submit">Agregar</button>
+         <!-- Botón para restaurar la tabla -->
+      <button onclick="restoreTable()" class="sidebar-button">Restaurar</button>
+        <label for="video"></label>
+        <input type="text" id="video" name="video" required placeholder="Link de youtube">
+        <label for="desc_vd1"></label>
+        <input type="text" id="desc_vd1" name="desc_vd1" required data-tooltip="Este campo debe describir brevemente el contenido del video." placeholder="Descripcion..">
+        
+      </form>
+
+     
+
+      <!-- Filtros -->
+      <div class="filters">
+        <h3></h3>
+        <label for="filterDesc">Descripción:</label>
+        <select id="filterDesc" name="filterDesc">
+          <option value="">Todas</option>
+        </select>
+        <label for="filterFecha">Fecha:</label>
+        <select id="filterFecha" name="filterFecha">
+          <option value="">Todas</option>
+        </select>
+        <button onclick="applyFilters()">Aplicar Filtros</button>
+      </div>
+    </aside>
+
+    <!-- Contenido principal (videos) -->
+    <main class="content">
+      <!-- Contenedor para los videos -->
+      <div id="videos"></div>
+    </main>
+  </div>
+
+  <!-- Modal para editar un video -->
+  <div class="overlay" id="overlay"></div>
+  <div class="modal" id="editModal">
+    <h2>Editar Video</h2>
+    <form id="editVideoForm">
+      <label for="editFecha">Fecha:</label>
+      <input type="text" id="editFecha" name="fecha1" readonly>
+      <label for="editVideo">URL del Video:</label>
+      <input type="text" id="editVideo" name="video">
+      <label for="editDesc">Descripción:</label>
+      <input type="text" id="editDesc" name="desc_vd1">
+      <button type="submit">Guardar Cambios</button>
+      <button type="button" onclick="closeModal()">Cancelar</button>
+    </form>
+  </div>
+
+  <script src="videosScripts.js"></script> <!-- Vinculamos el archivo JavaScript -->
+</body>
+</html>

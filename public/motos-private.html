@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrar catalogo</title>
+  <link rel="stylesheet" href="motos.css"> <!-- Vinculamos el archivo CSS -->
+</head>
+<body>
+  <header>
+   
+    <h2 ><a href="/index.html">Regresar</a></h2>
+  
+    <h1>Administrar catalogo</h1>
+  </header>
+
+  <main>
+    <!-- Contenedor Principal -->
+    <div class="container">
+      <!-- Formulario Compacto -->
+      <form id="itemForm" class="compact-form">
+        <button type="submit">Guardar</button>
+        <button type="button" id="cancelButton" style="display: none;" onclick="resetForm()">Cancelar</button>
+        <!-- Botón para restaurar la tabla -->
+       <button onclick="restoreTable()">Restaurar Tabla</button>
+        
+        <input type="hidden" id="itemId" name="id">
+        <label for="marca"></label>
+        <input type="text" id="marca" name="marca" required placeholder="Marca">
+        <label for="modelo"></label>
+        <input type="text" id="modelo" name="modelo" required placeholder="Modelo">
+        <label for="motor"></label>
+        <input type="text" id="motor" name="motor" required placeholder="Motor">
+        <label for="tipo"></label>
+        <input type="text" id="tipo" name="tipo" required placeholder="Tipo">
+        <label for="precio"></label>
+        <input type="text" id="precio" name="precio" required placeholder="Precio">
+        <label for="imagenFile"></label>
+        <input type="file" id="imagenFile" accept="image/*">
+        <input type="hidden" id="imagen" name="imagen">
+        <p id="preview"></p>
+        
+      </form>
+ 
+      <!-- Filtros -->
+<div class="filters">
+  <h3>Filtros</h3>
+  <label for="filterMarca">Marca:</label>
+  <select id="filterMarca" name="filterMarca">
+    <option value="">Todas</option>
+  </select>
+  <label for="filterModelo">Modelo:</label>
+  <select id="filterModelo" name="filterModelo">
+    <option value="">Todos</option>
+  </select>
+  <label for="filterTipo">Tipo:</label>
+  <select id="filterTipo" name="filterTipo">
+    <option value="">Todos</option>
+  </select>
+  <label for="filterPrecio">Precio:</label>
+  <select id="filterPrecio" name="filterPrecio">
+    <option value="">Todos</option>
+  </select>
+  <button onclick="applyFilters()">Aplicar Filtros</button>
+</div>
+
+<!-- Lista de ítems -->
+<div id="items-list"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Mi Aplicación. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="motosScripts.js"></script> <!-- Vinculamos el archivo JavaScript -->
+</body>
+</html>

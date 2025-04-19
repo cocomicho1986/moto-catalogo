@@ -1,0 +1,267 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background:linear-gradient(blue,orange);
+  
+}
+h2{
+  text-align: left;
+  margin-left: 10px;
+  font-size: medium;
+}
+
+header {
+  width: 100%;
+  background-color: #f4f4f4;
+  padding: 10px;
+  text-align: center;
+}
+
+main {
+  display: flex; /* Contenedor principal con Flexbox */
+  width: 95%; /* Ocupa el 95% del ancho de la pantalla */
+  max-width: 1400px; /* Máximo ancho del contenedor */
+  margin: 20px auto; /* Centrado horizontal */
+  gap: 20px; /* Espacio entre los elementos */
+}
+
+/* Estilo para el dashboard */
+#items-list {
+  flex: 2; /* La tabla ocupa 2 partes del espacio */
+  max-width: 600px; /* Reducimos el ancho máximo de la tabla */
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 600px; /* Altura máxima de la tabla */
+  overflow-y: auto; /* Barra de desplazamiento vertical */
+}
+
+.container {
+  display: flex; /* Distribución horizontal */
+  flex: 1; /* Ocupa todo el espacio disponible */
+  gap: 20px; /* Espacio entre los elementos */
+}
+
+.compact-form {
+  flex: 1; /* Formulario ocupa 1 parte del espacio */
+  max-width: 300px; /* Ancho máximo del formulario */
+  max-height: 320px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.compact-form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.compact-form input[type="text"],
+.compact-form input[type="file"] {
+  width: 80%;
+  padding: 6px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.compact-form button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 120px;
+}
+
+.compact-form button:hover {
+  background-color: #0056b3;
+}
+
+.filters {
+  flex: 1; /* Filtros ocupan 1 parte del espacio */
+  max-width: 300px; /* Ancho máximo de los filtros */
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filters label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.filters select {
+  width: 100%;
+  padding: 6px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filters button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.filters button:hover {
+  background-color: #218838;
+}
+
+#items-list {
+  flex: 2; /* La tabla ocupa 2 partes del espacio */
+  max-width: 600px; /* Reducimos el ancho máximo de la tabla */
+  background-color: #fff;
+  padding: 55px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 600px; /* Altura máxima de la tabla */
+  overflow-y: auto; /* Barra de desplazamiento vertical */
+  text-align: center;
+  
+}
+
+#items-list div {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  
+}
+
+#items-list img {
+  max-width: 150px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+footer {
+  width: 100%;
+  background-color: #f4f4f4;
+  padding: 10px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+  main {
+    flex-direction: column; /* Apilar los elementos verticalmente */
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .compact-form,
+  .filters,
+  #items-list {
+    max-width: 100%; /* Ocupar todo el ancho disponible */
+  }
+}
+/* Estilo para las imágenes dentro de los ítems */
+#items-list img {
+  max-width: 150px; /* Ancho máximo inicial */
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: transform 0.3s ease; /* Efecto suave al pasar el mouse */
+}
+
+/* Efecto de zoom al pasar el mouse */
+#items-list img:hover {
+  transform: scale(1.5); /* Aumenta el tamaño en un 20% */
+}
+#items-list img {
+  margin: 10px; /* Margen adicional para evitar solapamientos */
+}
+.spacer {
+  margin-bottom: 40px; /* Espacio debajo del elemento */
+}
+#eb {
+  margin: 10px; /* Margen adicional para evitar solapamientos */
+  gap: 10px;
+}
+.eb button{
+  width: 150px;
+  background-color: #0056b3;
+  font-size: medium;
+  color: #ccc;
+}
+.etiquetas{
+ 
+ font-family: 'Courier New', Courier, monospace;
+ 
+}
+.contenido{
+ 
+  font-family: 'Courier New', Courier, monospace;
+  color: #007bff;
+  
+ }
+
+/* Estilo general para la tabla */
+#items-list table {
+  width: 100%; /* La tabla ocupa todo el ancho disponible */
+  border-collapse: collapse; /* Une los bordes de las celdas */
+}
+
+/* Estilo para las celdas (<td>) */
+#items-list td {
+  border: 1px solid #ddd; /* Grosor y color del borde de las celdas */
+  padding: 8px; /* Espaciado interno dentro de las celdas */
+  vertical-align: top; /* Alinea el contenido hacia arriba */
+}
+
+/* Estilo para la columna de la imagen */
+#items-list td:first-child {
+  width: 30%; /* La imagen ocupa el 30% del ancho total */
+ 
+}
+
+/* Estilo para la columna de etiquetas */
+#items-list td:nth-child(2) {
+  width: 25%; /* Las etiquetas ocupan el 25% del ancho total */
+}
+
+/* Estilo para la columna de contenido */
+#items-list td:nth-child(3) {
+  width: 25%; /* El contenido ocupa el 45% del ancho total */
+}
+
+/* Estilo para las imágenes dentro de la tabla */
+#items-list img {
+  max-width: 100%; /* La imagen ocupa el ancho completo de su columna */
+  height: auto; /* Mantener proporción */
+  display: block; /* Evitar espacios innecesarios */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+@media (max-width: 600px) {
+  main {
+    flex-direction: column; /* Apilar elementos verticalmente */
+    width: 100%; /* Ocupar todo el ancho en pantallas pequeñas */
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "video-desarrollo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "npm run pkg-build && npm run create-dist && npm run copy-files && npm run move-executable || echo 'Error: Algo salió mal durante la construcción'",
+    "pkg-build": "pkg . --targets node18-win-x64",
+    "create-dist": "shx mkdir -p dist",
+    "copy-files": "shx cp -r public database routes dist/ && shx mkdir -p dist/node_modules/better-sqlite3/build && shx cp -r node_modules/better-sqlite3/build/Release dist/node_modules/better-sqlite3/build/",
+    "move-executable": "shx mv video-desarrollo* dist/"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "better-sqlite3": "^11.9.1",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "moment-timezone": "^0.5.48",
+    "multer": "^1.4.5-lts.2"
+  },
+  "devDependencies": {
+    "shx": "^0.4.0"
+  },
+  "pkg": {
+    "scripts": [
+      "index.js"
+    ],
+    "assets": [
+      "public/**/*",
+      "database/database.sqlite",
+      "routes/**/*.js",
+      "node_modules/better-sqlite3/build/Release/better_sqlite3.node",
+      "node_modules/better-sqlite3/**/*",
+      "index.js"
+    ]
+  }
+}

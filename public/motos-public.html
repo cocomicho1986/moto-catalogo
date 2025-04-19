@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrar Items</title>
+  <link rel="stylesheet" href="motos.css"> <!-- Vinculamos el archivo CSS -->
+</head>
+<body>
+  <header>
+    <h2 ><a href="/index.html">Regresar</a></h2>
+    <h1>Administrar Items</h1>
+  </header>
+
+  <main>
+    <!-- Contenedor Principal -->
+    <div class="container">
+    
+      <!-- Filtros Select -->
+      <div class="filters">
+        <h3>Filtros</h3>
+        <label for="filterMarca">Marca:</label>
+        <select id="filterMarca" name="filterMarca">
+          <option value="">Todas</option>
+        </select>
+        <label for="filterModelo">Modelo:</label>
+        <select id="filterModelo" name="filterModelo">
+          <option value="">Todos</option>
+        </select>
+        <label for="filterTipo">Tipo:</label>
+        <select id="filterTipo" name="filterTipo">
+          <option value="">Todos</option>
+        </select>
+        <label for="filterPrecio">Precio:</label>
+        <select id="filterPrecio" name="filterPrecio">
+          <option value="">Todos</option>
+        </select>
+        <button onclick="applyFilters()">Aplicar Filtros</button>
+      </div>
+    </div>
+
+    <!-- Lista de Ítems -->
+    <div id="items-list"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Mi Aplicación. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="motosScripts-public.js"></script> <!-- Vinculamos el archivo JavaScript -->
+</body>
+</html>

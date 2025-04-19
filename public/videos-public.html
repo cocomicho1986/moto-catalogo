@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Videos Públicos</title>
+  <link rel="stylesheet" href="videos-public.css"> <!-- Vinculamos el archivo CSS -->
+</head>
+<body>
+  <h2 ><a href="/index.html">Regresar</a></h2>
+  <h1>Galeria de videos</h1>
+
+  <!-- Contenedor principal con diseño de dos columnas -->
+  <div class="container">
+    <!-- Barra lateral izquierda -->
+    <aside class="sidebar">
+      
+
+      
+
+      <!-- Filtros -->
+      <div class="filters">
+        <h3></h3>
+        <label for="filterDesc">Descripción</label>
+        <select id="filterDesc" name="filterDesc">
+          <option value="">todos</option>
+        </select>
+        <label for="filterFecha">Fecha</label>
+        <select id="filterFecha" name="filterFecha">
+          <option value="">todos</option>
+        </select>
+        <button onclick="applyFilters()">Aplicar Filtros</button>
+      </div>
+    </aside>
+
+    <!-- Contenido principal (videos) -->
+    <main class="content">
+      <!-- Contenedor para los videos -->
+      <div id="videos"></div>
+    </main>
+  </div>
+
+  <!-- Modal para editar un video -->
+  <div class="overlay" id="overlay"></div>
+  <div class="modal" id="editModal">
+    <h2>Editar Video</h2>
+    <form id="editVideoForm">
+      <label for="editFecha">Fecha:</label>
+      <input type="text" id="editFecha" name="fecha1" readonly>
+      <label for="editVideo">URL del Video:</label>
+      <input type="text" id="editVideo" name="video">
+      <label for="editDesc">Descripción:</label>
+      <input type="text" id="editDesc" name="desc_vd1">
+      <button type="submit">Guardar Cambios</button>
+      <button type="button" onclick="closeModal()">Cancelar</button>
+    </form>
+  </div>
+
+  <script src="videosScripts-public.js"></script> <!-- Vinculamos el archivo JavaScript -->
+</body>
+</html>

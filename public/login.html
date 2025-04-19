@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2 ><a href="/index.html">Regresar</a></h2>
+  <h1>Iniciar Sesión</h1>
+  <form id="loginForm">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    <label for="clave">Contraseña:</label>
+    <input type="password" id="clave" name="clave" required>
+    <button type="submit">Iniciar Sesión</button>
+  </form>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault(); // Evitar que el formulario se envíe de forma tradicional
+
+      // Obtener los datos del formulario
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        // Enviar los datos al backend mediante una solicitud POST
+        const response = await fetch('/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        // Procesar la respuesta del backend
+        const result = await response.json();
+        if (result.success) {
+          alert('Login exitoso.');
+          window.location.href = '/dashboard.html'; // Redirigir al dashboard
+        } else {
+          alert(result.message || 'Error al iniciar sesión.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Ocurrió un error al iniciar sesión.');
+      }
+    });
+  </script>
+</body>
+</html>
