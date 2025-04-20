@@ -13,8 +13,7 @@ if (process.env.RENDER) {
   try {
     // Verificar si el volumen persistente /data existe
     if (!require('fs').existsSync(dataDir)) {
-      console.error('[ERROR] El volumen persistente /data no existe.');
-      process.exit(1); // Detener la aplicación si el volumen no existe
+      throw new Error('El volumen persistente /data no existe.');
     }
 
     // Definir la ruta del archivo de base de datos
@@ -22,7 +21,10 @@ if (process.env.RENDER) {
     console.log('[DEPURACIÓN] Ruta de la base de datos en Render:', dbPath);
   } catch (error) {
     console.error('[ERROR] No se pudo acceder al volumen persistente:', error.message);
-    process.exit(1); // Detener la aplicación si hay un error
+    console.warn('[ADVERTENCIA] Usando ruta temporal como respaldo: /tmp/database.sqlite');
+
+    // Usar una ruta temporal como respaldo
+    dbPath = '/tmp/database.sqlite';
   }
 } else if (process.pkg) {
   // Si es un ejecutable generado con pkg
@@ -34,8 +36,7 @@ if (process.env.RENDER) {
 
 // Verificar si el archivo de base de datos existe
 if (!require('fs').existsSync(dbPath)) {
-  console.error('[ERROR] El archivo de base de datos no existe:', dbPath);
-  process.exit(1); // Detener la aplicación si el archivo no existe
+  console.warn('[ADVERTENCIA] El archivo de base de datos no existe. Se creará uno nuevo:', dbPath);
 }
 
 // Conexión a la base de datos
@@ -45,7 +46,7 @@ try {
   console.log('[DEPURACIÓN] Conexión a la base de datos establecida.');
 } catch (error) {
   console.error('[ERROR] No se pudo conectar a la base de datos:', error.message);
-  process.exit(1); // Detener la aplicación si hay un error
+  process.exit(1); // Detener la aplicación solo si falla la conexión
 }
 
 // Verificar si la tabla 'tabla_video' existe
