@@ -8,7 +8,7 @@ let dbPath;
 
 if (process.env.RENDER) {
   // Si estamos en Render, usamos el volumen persistente
-  const dataDir = '/data';
+  const dataDir = '/data/database'; // Subdirectorio dentro del volumen persistente
   if (!require('fs').existsSync(dataDir)) {
     require('fs').mkdirSync(dataDir, { recursive: true });
     console.log('[DEPURACIÓN] Directorio persistente creado:', dataDir);
