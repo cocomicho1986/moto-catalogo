@@ -5,24 +5,55 @@ const router = express.Router();
 
 // Ruta de la base de datos
 let dbPath;
-if (process.pkg) {
-  dbPath = path.resolve(process.execPath, '..', 'database', 'database.sqlite');
+
+if (process.env.RENDER) {
+  const dataDir = '/data'; // Usar directamente el volumen persistente
+  console.log('[DEPURACIÓN] Verificando si existe el directorio:', dataDir);
+
+  try {
+    // Verificar si el volumen persistente /data existe
+    if (!require('fs').existsSync(dataDir)) {
+      throw new Error('El volumen persistente /data no existe.');
+    }
+
+    // Definir la ruta del archivo de base de datos
+    dbPath = require('path').join(dataDir, 'database.sqlite');
+    console.log('[DEPURACIÓN] Ruta de la base de datos en Render:', dbPath);
+  } catch (error) {
+    console.error('[ERROR] No se pudo acceder al volumen persistente:', error.message);
+    console.warn('[ADVERTENCIA] Usando ruta temporal como respaldo: /tmp/database.sqlite');
+
+    // Usar una ruta temporal como respaldo
+    dbPath = '/tmp/database.sqlite';
+  }
+} else if (process.pkg) {
+  // Si es un ejecutable generado con pkg
+  dbPath = require('path').resolve(process.execPath, '..', 'database', 'database.sqlite');
 } else {
-  dbPath = path.join(__dirname, '..', 'database', 'database.sqlite');
+  // Si es desarrollo local
+  dbPath = require('path').join(__dirname, '..', 'database', 'database.sqlite');
 }
 
-if (!require('fs').existsSync(dbPath)) {
-  console.error('[ERROR] El archivo de base de datos no existe:', dbPath);
-  process.exit(1); // Detener la aplicación si el archivo no existe
+// Forzar la creación del archivo de base de datos si no existe
+try {
+  if (!require('fs').existsSync(dbPath)) {
+    console.warn('[ADVERTENCIA] El archivo de base de datos no existe. Creando uno nuevo:', dbPath);
+    // Forzar la creación del archivo vacío
+    require('fs').writeFileSync(dbPath, '');
+  }
+} catch (error) {
+  console.error('[ERROR] No se pudo crear el archivo de base de datos:', error.message);
+  process.exit(1); // Detener la aplicación solo si falla la creación del archivo
 }
 
+// Conexión a la base de datos
 let db;
 try {
   db = new Database(dbPath);
   console.log('[DEPURACIÓN] Conexión a la base de datos establecida.');
 } catch (error) {
   console.error('[ERROR] No se pudo conectar a la base de datos:', error.message);
-  process.exit(1); // Detener la aplicación si hay un error
+  process.exit(1); // Detener la aplicación solo si falla la conexión
 }
 
 // Verificar si la tabla 'tabla_video' existe
