@@ -86,19 +86,45 @@ try {
 //  }
 //}
 
-// Definición de la función
 function extractYouTubeInfo(videoUrl) {
-  // Expresión regular para extraer el ID del video
-  const videoRegExp = /^.*(youtu.be\/|v\/|\/u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-  const videoMatch = videoUrl.match(videoRegExp);
-  const videoId = videoMatch && videoMatch[2].length === 11 ? videoMatch[2] : null;
+  try {
+    if (!videoUrl || typeof videoUrl !== 'string') {
+      console.warn('[ADVERTENCIA] La URL o ID del video es inválida o no está definida:', videoUrl);
+      return { videoId: null, playlistId: null };
+    }
 
-  // Expresión regular para extraer el ID de la lista de reproducción
-  const playlistRegExp = /[?&]list=([^&#]+)/;
-  const playlistMatch = videoUrl.match(playlistRegExp);
-  const playlistId = playlistMatch ? playlistMatch[1] : null;
+    console.log('[DEPURACIÓN] Procesando URL o ID de video proporcionado:', videoUrl);
 
-  return { videoId, playlistId };
+    // Si el valor proporcionado parece ser un ID directo (11 caracteres)
+    if (videoUrl.length === 11 && /^[a-zA-Z0-9_-]+$/.test(videoUrl)) {
+      console.log('[DEPURACIÓN] Se detectó un ID de video directo:', videoUrl);
+      return { videoId: videoUrl, playlistId: null };
+    }
+
+    // Expresión regular para extraer el ID del video de una URL completa
+    const videoRegExp = /^.*(youtu.be\/|v\/|\/u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const videoMatch = videoUrl.match(videoRegExp);
+    let videoId = null;
+
+    if (videoMatch && videoMatch[2] && videoMatch[2].length === 11) {
+      videoId = videoMatch[2];
+    } else {
+      console.warn('[ADVERTENCIA] No se pudo extraer un ID de video válido de la URL:', videoUrl);
+    }
+
+    // Expresión regular para extraer el ID de la lista de reproducción
+    const playlistRegExp = /[?&]list=([^&#]+)/;
+    const playlistMatch = videoUrl.match(playlistRegExp);
+    const playlistId = playlistMatch ? playlistMatch[1] : null;
+
+    console.log('[DEPURACIÓN] ID del video extraído:', videoId);
+    console.log('[DEPURACIÓN] ID de la lista de reproducción extraído:', playlistId);
+
+    return { videoId, playlistId };
+  } catch (error) {
+    console.error('[ERROR] Error al extraer información del video:', error.message);
+    return { videoId: null, playlistId: null };
+  }
 }
 
 // Ruta pública: Obtener videos
@@ -118,6 +144,11 @@ router.get('/public', (req, res) => {
 router.post('/', (req, res) => {
   const { desc_vd1, video } = req.body;
 
+  // Validar que se proporcione una URL de video
+  if (!video || typeof video !== 'string') {
+    return res.status(400).json({ error: "La URL del video es inválida o no se proporcionó." });
+  }
+
   // Agregar la fecha actual
   const moment = require('moment-timezone');
   const fecha1 = moment.tz(new Date(), 'America/Argentina/Buenos_Aires').format('YYYY-MM-DD');
@@ -127,7 +158,7 @@ router.post('/', (req, res) => {
     const { videoId } = extractYouTubeInfo(video);
 
     if (!videoId) {
-      return res.status(400).json({ error: "No se pudo extraer el ID del video." });
+      return res.status(400).json({ error: "No se pudo extraer el ID del video. Verifica que la URL sea válida." });
     }
 
     // Insertar el video en la base de datos
@@ -148,21 +179,39 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params; // ID del video a actualizar
   const { desc_vd1, fecha1, video } = req.body;
+
+  console.log('[DEPURACIÓN] Iniciando actualización del video...');
+  console.log('[DEPURACIÓN] ID del video a actualizar:', id);
+  console.log('[DEPURACIÓN] Datos recibidos en el cuerpo de la solicitud:', { desc_vd1, fecha1, video });
 
   try {
     let videoId = null;
+
+    // Si se proporciona una nueva URL de video
     if (video) {
+      console.log('[DEPURACIÓN] Procesando URL de video proporcionada:', video);
+
+      // Validar que se proporcione una URL válida
+      if (!video || typeof video !== 'string') {
+        console.warn('[ADVERTENCIA] La URL del video es inválida o no se proporcionó.');
+        return res.status(400).json({ error: "La URL del video es inválida o no se proporcionó." });
+      }
+
       // Extraer el ID del video
       const extractedInfo = extractYouTubeInfo(video);
       videoId = extractedInfo.videoId;
 
+      console.log('[DEPURACIÓN] ID del video extraído:', videoId);
+
       if (!videoId) {
-        return res.status(400).json({ error: "No se pudo extraer el ID del video." });
+        console.warn('[ADVERTENCIA] No se pudo extraer un ID de video válido de la URL proporcionada.');
+        return res.status(400).json({ error: "No se pudo extraer el ID del video. Verifica que la URL sea válida." });
       }
     }
 
+    // Construir la consulta SQL dinámica
     let sql = 'UPDATE tabla_video SET ';
     const updates = [];
     const params = [];
@@ -181,21 +230,29 @@ router.put('/:id', (req, res) => {
     }
 
     if (updates.length === 0) {
+      console.warn('[ADVERTENCIA] No se proporcionaron datos para actualizar.');
       return res.status(400).json({ error: 'No se proporcionaron datos para actualizar.' });
     }
 
     sql += updates.join(', ') + ' WHERE id = ?';
     params.push(id);
 
+    console.log('[DEPURACIÓN] Consulta SQL generada:', sql);
+    console.log('[DEPURACIÓN] Parámetros de la consulta:', params);
+
+    // Ejecutar la consulta
     const result = db.prepare(sql).run(...params);
 
+    console.log('[DEPURACIÓN] Resultado de la actualización:', result);
+
     if (result.changes === 0) {
+      console.warn('[ADVERTENCIA] No se encontró ningún video con el ID proporcionado:', id);
       return res.status(404).json({ error: 'Video no encontrado.' });
     }
 
     res.json({ mensaje: 'Video actualizado exitosamente.' });
   } catch (error) {
-    console.error("Error al actualizar video:", error.message);
+    console.error('[ERROR] Error al actualizar video:', error.message);
     res.status(500).json({ error: "Error interno del servidor." });
   }
 });
