@@ -7,19 +7,23 @@ const router = express.Router();
 let dbPath;
 
 if (process.env.RENDER) {
-  // Si estamos en Render, usamos el volumen persistente
   const dataDir = '/data/database'; // Subdirectorio dentro del volumen persistente
-  if (!require('fs').existsSync(dataDir)) {
-    require('fs').mkdirSync(dataDir, { recursive: true });
-    console.log('[DEPURACIÓN] Directorio persistente creado:', dataDir);
+  console.log('[DEPURACIÓN] Verificando si existe el directorio:', dataDir);
+  
+  try {
+    if (!require('fs').existsSync(dataDir)) {
+      console.log('[DEPURACIÓN] El directorio no existe. Creando:', dataDir);
+      require('fs').mkdirSync(dataDir, { recursive: true });
+      console.log('[DEPURACIÓN] Directorio creado exitosamente:', dataDir);
+    } else {
+      console.log('[DEPURACIÓN] El directorio ya existe:', dataDir);
+    }
+  } catch (error) {
+    console.error('[ERROR] No se pudo crear el directorio:', error.message);
+    process.exit(1); // Detener la aplicación si hay un error
   }
+
   dbPath = require('path').join(dataDir, 'database.sqlite');
-} else if (process.pkg) {
-  // Si es un ejecutable generado con pkg
-  dbPath = require('path').resolve(process.execPath, '..', 'database', 'database.sqlite');
-} else {
-  // Si es desarrollo local
-  dbPath = require('path').join(__dirname, '..', 'database', 'database.sqlite');
 }
 
 // Verificar si el archivo de base de datos existe
