@@ -381,3 +381,9 @@ td {
   padding: 8px;
   border: 1px solid #ddd;
 }
+@media (max-width: 600px) {
+  main {
+    flex-direction: column; /* Apilar elementos verticalmente */
+    width: 100%; /* Ocupar todo el ancho en pantallas pequeñas */
+  }
+}
