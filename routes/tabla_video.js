@@ -5,12 +5,24 @@ const router = express.Router();
 
 // Ruta de la base de datos
 let dbPath;
-if (process.pkg) {
-  dbPath = path.resolve(process.execPath, '..', 'database', 'database.sqlite');
+
+if (process.env.RENDER) {
+  // Si estamos en Render, usamos el volumen persistente
+  const dataDir = '/data';
+  if (!require('fs').existsSync(dataDir)) {
+    require('fs').mkdirSync(dataDir, { recursive: true });
+    console.log('[DEPURACIÓN] Directorio persistente creado:', dataDir);
+  }
+  dbPath = require('path').join(dataDir, 'database.sqlite');
+} else if (process.pkg) {
+  // Si es un ejecutable generado con pkg
+  dbPath = require('path').resolve(process.execPath, '..', 'database', 'database.sqlite');
 } else {
-  dbPath = path.join(__dirname, '..', 'database', 'database.sqlite');
+  // Si es desarrollo local
+  dbPath = require('path').join(__dirname, '..', 'database', 'database.sqlite');
 }
 
+// Verificar si el archivo de base de datos existe
 if (!require('fs').existsSync(dbPath)) {
   console.error('[ERROR] El archivo de base de datos no existe:', dbPath);
   process.exit(1); // Detener la aplicación si el archivo no existe
