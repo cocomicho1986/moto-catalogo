@@ -7,22 +7,20 @@ const router = express.Router();
 let dbPath;
 
 if (process.env.RENDER) {
-  const dataDir = '/data'; // Usar directamente el volumen persistente
-  console.log('[DEPURACIÓN] Verificando si existe el directorio:', dataDir);
+  const dataDir = '/data'; // Intentar usar el volumen persistente
+  console.log('[DEPURACIÓN] Intentando acceder al volumen persistente:', dataDir);
 
+  // Intentar usar /data, pero ignorar errores si no está disponible
   try {
-    // Verificar si el volumen persistente /data existe
-    if (!require('fs').existsSync(dataDir)) {
+    if (require('fs').existsSync(dataDir)) {
+      // Si /data existe, usarlo
+      dbPath = require('path').join(dataDir, 'database.sqlite');
+      console.log('[DEPURACIÓN] Usando volumen persistente en Render:', dbPath);
+    } else {
       throw new Error('El volumen persistente /data no existe.');
     }
-
-    // Definir la ruta del archivo de base de datos
-    dbPath = require('path').join(dataDir, 'database.sqlite');
-    console.log('[DEPURACIÓN] Ruta de la base de datos en Render:', dbPath);
   } catch (error) {
-    console.error('[ERROR] No se pudo acceder al volumen persistente:', error.message);
-    console.warn('[ADVERTENCIA] Usando ruta temporal como respaldo: /tmp/database.sqlite');
-
+    console.warn('[ADVERTENCIA] No se pudo acceder al volumen persistente. Usando ruta temporal como respaldo: /tmp/database.sqlite');
     // Usar una ruta temporal como respaldo
     dbPath = '/tmp/database.sqlite';
   }
