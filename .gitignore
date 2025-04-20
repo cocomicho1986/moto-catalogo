@@ -1,0 +1,5 @@
+# Ignorar node_modules/ en todo el proyecto
+node_modules/
+
+# Ignorar archivos de logs (opcional)
+keep-alive.log
