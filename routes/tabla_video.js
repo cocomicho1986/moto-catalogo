@@ -39,13 +39,28 @@ try {
 }
 
 // Función para extraer el ID de YouTube
-function extractYouTubeId(videoUrl) {
-  const urlLength = videoUrl.length;
-  if (urlLength < 43) {
-    return videoUrl.substring(17, 28); // Extrae el ID desde la posición 17 hasta 28
-  } else {
-    return videoUrl.substring(32, 43); // Extrae el ID desde la posición 32 hasta 43
-  }
+//function extractYouTubeId(videoUrl) {
+//  const urlLength = videoUrl.length;
+//  if (urlLength < 43) {
+//    return videoUrl.substring(17, 28); // Extrae el ID desde la posición 17 hasta 28 celular
+//  } else {
+//    return videoUrl.substring(32, 43); // Extrae el ID desde la posición 32 hasta 43 pc
+//  }
+//}
+
+// Definición de la función
+function extractYouTubeInfo(videoUrl) {
+  // Expresión regular para extraer el ID del video
+  const videoRegExp = /^.*(youtu.be\/|v\/|\/u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const videoMatch = videoUrl.match(videoRegExp);
+  const videoId = videoMatch && videoMatch[2].length === 11 ? videoMatch[2] : null;
+
+  // Expresión regular para extraer el ID de la lista de reproducción
+  const playlistRegExp = /[?&]list=([^&#]+)/;
+  const playlistMatch = videoUrl.match(playlistRegExp);
+  const playlistId = playlistMatch ? playlistMatch[1] : null;
+
+  return { videoId, playlistId };
 }
 
 // Ruta pública: Obtener videos
@@ -62,20 +77,22 @@ router.get('/public', (req, res) => {
   }
 });
 
-// Ruta para agregar un nuevo video
 router.post('/', (req, res) => {
   const { desc_vd1, video } = req.body;
+
   // Agregar la fecha actual
- // const fecha1 = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
-
   const moment = require('moment-timezone');
-
-// Generar la fecha actual en la zona horaria deseada
-const fecha1 = moment.tz(new Date(), 'America/Argentina/Buenos_Aires').format('YYYY-MM-DD');
+  const fecha1 = moment.tz(new Date(), 'America/Argentina/Buenos_Aires').format('YYYY-MM-DD');
 
   try {
-    const videoId = extractYouTubeId(video);
+    // Extraer el ID del video
+    const { videoId } = extractYouTubeInfo(video);
 
+    if (!videoId) {
+      return res.status(400).json({ error: "No se pudo extraer el ID del video." });
+    }
+
+    // Insertar el video en la base de datos
     const sql = 'INSERT INTO tabla_video (desc_vd1, fecha1, video1) VALUES (?, ?, ?)';
     const result = db.prepare(sql).run(desc_vd1, fecha1, videoId);
 
@@ -92,13 +109,21 @@ const fecha1 = moment.tz(new Date(), 'America/Argentina/Buenos_Aires').format('Y
   }
 });
 
-// Ruta para modificar un video existente
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const { desc_vd1, fecha1, video } = req.body;
 
   try {
-    const videoId = video ? extractYouTubeId(video) : null;
+    let videoId = null;
+    if (video) {
+      // Extraer el ID del video
+      const extractedInfo = extractYouTubeInfo(video);
+      videoId = extractedInfo.videoId;
+
+      if (!videoId) {
+        return res.status(400).json({ error: "No se pudo extraer el ID del video." });
+      }
+    }
 
     let sql = 'UPDATE tabla_video SET ';
     const updates = [];
