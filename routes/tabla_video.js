@@ -54,16 +54,25 @@ try {
   process.exit(1); // Detener la aplicación solo si falla la conexión
 }
 
-// Verificar si la tabla 'tabla_video' existe
+// Verificar y crear la tabla 'tabla_video' si no existe
 try {
   const tableExists = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='tabla_video';").get();
   if (!tableExists) {
-    console.error("[ERROR] La tabla 'tabla_video' no existe.");
-    process.exit(1); // Detener la aplicación si la tabla no existe
+    console.warn('[ADVERTENCIA] La tabla "tabla_video" no existe. Creándola...');
+    db.exec(`
+      CREATE TABLE tabla_video (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        desc_vd1 TEXT NOT NULL,
+        fecha1 TEXT NOT NULL,
+        video1 TEXT NOT NULL
+      );
+    `);
+    console.log('[DEPURACIÓN] Tabla "tabla_video" creada correctamente.');
+  } else {
+    console.log('[DEPURACIÓN] Tabla "tabla_video" verificada correctamente.');
   }
-  console.log('[DEPURACIÓN] Tabla "tabla_video" verificada correctamente.');
 } catch (error) {
-  console.error('[ERROR] Error al verificar la tabla:', error.message);
+  console.error('[ERROR] Error al verificar o crear la tabla "tabla_video":', error.message);
   process.exit(1); // Detener la aplicación si hay un error
 }
 
