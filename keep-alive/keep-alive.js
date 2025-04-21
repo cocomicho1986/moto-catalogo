@@ -8,25 +8,12 @@ const APP_URL = 'https://moto-catalogo.onrender.com'; // Cambia esto por la URL 
 // Ruta para guardar los logs
 const LOG_FILE = path.join(__dirname, 'keep-alive.log');
 
-// Ruta para guardar la última ejecución
-const LAST_PING_FILE = path.join(__dirname, 'last-ping.json');
-
 // Función para registrar logs
 function logMessage(message) {
   const timestamp = new Date().toISOString();
   const logEntry = `[${timestamp}] ${message}\n`;
   console.log(logEntry.trim()); // Mostrar en la consola
   fs.appendFileSync(LOG_FILE, logEntry); // Guardar en el archivo de logs
-}
-
-// Función para registrar la última ejecución
-function logLastPing() {
-  const lastPing = new Date().toISOString();
-  const data = { lastPing };
-
-  // Guardar la hora en un archivo JSON
-  fs.writeFileSync(LAST_PING_FILE, JSON.stringify(data, null, 2));
-  console.log(`[Keep-Alive] Último ping registrado: ${lastPing}`);
 }
 
 // Función para enviar solicitudes
@@ -39,9 +26,6 @@ async function keepAlive() {
     // Intentar nuevamente después de 1 minuto
     setTimeout(keepAlive, 60 * 1000);
   }
-
-  // Registrar la última ejecución
-  logLastPing();
 }
 
 // Ejecutar cada 5 minutos
