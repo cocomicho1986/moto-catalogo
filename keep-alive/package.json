@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "main": "keep-alive.js",
   "scripts": {
+    "start": "node keep-alive.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "keep-alive",
+    "render",
+    "uptime"
+  ],
+  "author": "Tu Nombre <diegovazquezlavaska@gmail.com>",
   "license": "ISC",
-  "description": "",
+  "description": "Script para mantener activa una aplicación en Render mediante pings periódicos.",
   "dependencies": {
     "axios": "^1.8.4"
   }
