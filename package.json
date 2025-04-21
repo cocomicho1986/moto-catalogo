@@ -4,7 +4,7 @@
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js & cd keep-alive && npm install && npm start",
     "build": "npm run pkg-build && npm run create-dist && npm run copy-files && npm run move-executable || echo 'Error: Algo salió mal durante la construcción'",
     "pkg-build": "pkg . --targets node18-win-x64",
     "create-dist": "shx mkdir -p dist",
