@@ -32,7 +32,17 @@
         <label for="motor"></label>
         <input type="text" id="motor" name="motor" required placeholder="Motor">
         <label for="tipo"></label>
-        <input type="text" id="tipo" name="tipo" required placeholder="Tipo">
+        <!--<input type="text" id="tipo" name="tipo" required placeholder="Tipo">-->
+        <select id="tipo" name="tipo" required>
+          <option value="" disabled selected>Selecciona un tipo</option>
+          <option value="Deportiva">Deportiva</option>
+          <option value="Cruiser">Cruiser</option>
+          <option value="Enduro">Enduro</option>
+          <option value="Scooter">Scooter</option>
+          <option value="Custom">Custom</option>
+          <option value="Trail">Trail</option>
+          <option value="Naked">Naked</option>
+        </select>
         <label for="precio"></label>
         <input type="text" id="precio" name="precio" required placeholder="Precio">
         <label for="imagenFile"></label>

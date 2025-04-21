@@ -5,6 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bienvenido</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Estilos para el indicador de estado */
+    #keep-alive-status {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+    }
+
+    .status-online {
+      color: green;
+    }
+
+    .status-offline {
+      color: red;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -22,5 +44,39 @@
   <footer>
     <p>&copy; 2023 Mi Aplicación. Todos los derechos reservados.</p>
   </footer>
+
+  <!-- Indicador de estado -->
+  <div id="keep-alive-status">Cargando estado...</div>
+
+  <script>
+    // Función para obtener el estado del Keep-Alive
+    async function fetchKeepAliveStatus() {
+      const statusElement = document.getElementById('keep-alive-status');
+      try {
+        const response = await fetch('/last-ping.json'); // Leer el archivo JSON desde el backend
+        if (!response.ok) {
+          throw new Error('Archivo last-ping.json no encontrado');
+        }
+        const data = await response.json();
+
+        if (data.lastPing) {
+          statusElement.innerHTML = `Keep-Alive: Activo <br> Último ping: ${data.lastPing}`;
+          statusElement.className = 'status-online';
+        } else {
+          statusElement.innerHTML = 'Keep-Alive: Inactivo';
+          statusElement.className = 'status-offline';
+        }
+      } catch (error) {
+        statusElement.innerHTML = 'Error al cargar el estado';
+        statusElement.className = 'status-offline';
+      }
+    }
+
+    // Actualizar el estado cada 10 segundos
+    setInterval(fetchKeepAliveStatus, 10 * 1000);
+
+    // Cargar el estado inicial
+    fetchKeepAliveStatus();
+  </script>
 </body>
 </html>
