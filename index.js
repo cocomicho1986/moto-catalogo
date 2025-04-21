@@ -110,6 +110,19 @@ const betterSqlitePath = (() => {
 const Database = require('better-sqlite3');
 const db = new Database(global.dbPath);
 
+// ================= NUEVA RUTA PARA SERVIR last-ping.json =================
+app.get('/last-ping.json', (req, res) => {
+  const lastPingPath = path.join(__dirname, 'keep-alive', 'last-ping.json'); // Ruta al archivo generado por Keep-Alive
+
+  // Verificar si el archivo existe
+  if (fs.existsSync(lastPingPath)) {
+    res.sendFile(lastPingPath); // Enviar el archivo como respuesta
+  } else {
+    res.status(404).json({ error: 'Archivo last-ping.json no encontrado' }); // Respuesta si el archivo no existe
+  }
+});
+// ========================================================================
+
 // Usar los routers modulares
 app.use('/auth', authRoutes); // Rutas de autenticación
 app.use('/api/motos', motosRoutes); // CRUD privado para la tabla motos
