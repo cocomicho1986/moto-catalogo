@@ -7,9 +7,12 @@ const fs = require('fs'); // Módulo para interactuar con el sistema de archivos
 const authRoutes = require('./routes/auth'); // Rutas de autenticación
 const motosRoutes = require('./routes/motos'); // CRUD privado para la tabla `motos`
 const tabla_videoRoutes = require('./routes/tabla_video'); // CRUD privado para la tabla `tb_vd1`
-const tabla_videoPRoutes = require('./routes/tabla_video-public'); // CRUD privado para la tabla `tb_vd1`
+const tabla_videoPRoutes = require('./routes/tabla_video-public'); // CRUD público para la tabla `tb_vd1`
 const usuariosRoutes = require('./routes/usuarios'); // CRUD privado para la tabla `usuarios`
 const motosPRoutes = require('./routes/motos-public'); // Rutas públicas para leer ítems
+
+// Importa el script keep-alive-scripts
+require('./keep-alive-script/keep-alive'); // Ejecuta el script automáticamente
 
 // Crear una instancia de Express
 const app = express();
@@ -120,7 +123,7 @@ app.use('/api/public/motos-public', motosPRoutes); // Rutas públicas para leer 
 
 // Ruta para servir el archivo last-ping.json
 app.get('/last-ping.json', (req, res) => {
-  const lastPingPath = path.join(__dirname, 'keep-alive', 'last-ping.json'); // Ruta al archivo
+  const lastPingPath = path.join(__dirname, 'keep-alive-scripts', 'last-ping.json'); // Ruta al archivo
 
   // Verificar si el archivo existe
   if (fs.existsSync(lastPingPath)) {
