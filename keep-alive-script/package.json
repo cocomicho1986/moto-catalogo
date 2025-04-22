@@ -1,0 +1,44 @@
+{
+  "name": "keep-alive-script",
+  "version": "1.0.0",
+  "description": "Script para mantener activas aplicaciones web enviando solicitudes periódicas.",
+  "main": "keep-alive.js",
+  "scripts": {
+    "start": "node keep-alive.js", 
+    "dev": "nodemon keep-alive.js", 
+    "build": "rm -rf dist && mkdir dist && cp -r views public keep-alive.js package.json dist/ && pkg . --out-path dist --debug", 
+    "lint": "eslint .", 
+    "test": "jest" 
+  },
+  "bin": "keep-alive.js", 
+  "pkg": {
+    "scripts": [
+      "keep-alive.js"
+    ],
+    "assets": [
+      "views/**/*", 
+      "public/**/*",
+      "node_modules/axios/dist/**/*.cjs"
+    ],
+    "targets": [
+      "node18-linux-x64", 
+      "node18-macos-x64", 
+      "node18-win-x64" 
+    ],
+    "dependencies": [
+      "axios",
+      "express",
+      "dotenv"
+    ]
+  },
+  "dependencies": {
+    "axios": "^1.8.4", 
+    "express": "^5.1.0", 
+    "dotenv": "^16.0.0" 
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0", 
+    "jest": "^29.0.0", 
+    "nodemon": "^2.0.0" 
+  }
+}
