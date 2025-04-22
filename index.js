@@ -118,6 +118,19 @@ app.use('/api/public/tabla_video-public', tabla_videoPRoutes); // publico para l
 app.use('/api/usuarios', usuariosRoutes); // CRUD privado para la tabla `usuarios`
 app.use('/api/public/motos-public', motosPRoutes); // Rutas públicas para leer motos public
 
+// Ruta para servir el archivo last-ping.json
+app.get('/last-ping.json', (req, res) => {
+  const lastPingPath = path.join(__dirname, 'keep-alive', 'last-ping.json'); // Ruta al archivo
+
+  // Verificar si el archivo existe
+  if (fs.existsSync(lastPingPath)) {
+    res.sendFile(lastPingPath); // Enviar el archivo como respuesta
+  } else {
+    console.error('[ERROR] Archivo last-ping.json no encontrado en:', lastPingPath);
+    res.status(404).json({ error: 'Archivo last-ping.json no encontrado' });
+  }
+});
+
 // Middleware para manejar errores 404
 app.use((req, res) => {
   res.status(404).send('Ruta no encontrada.'); // Respuesta para rutas no definidas
