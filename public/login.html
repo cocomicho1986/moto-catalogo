@@ -29,37 +29,8 @@
     </form>
   </div>
 
-  <!-- Script para manejar el login -->
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault(); // Evitar que el formulario se envíe de forma tradicional
-
-      // Obtener los datos del formulario
-      const formData = new FormData(e.target);
-      const data = Object.fromEntries(formData.entries());
-
-      try {
-        // Enviar los datos al backend mediante una solicitud POST
-        const response = await fetch('/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-
-        // Procesar la respuesta del backend
-        const result = await response.json();
-        if (result.success) {
-          alert('Login exitoso.');
-          window.location.href = '/dashboard.html'; // Redirigir al dashboard
-        } else {
-          alert(result.message || 'Error al iniciar sesión.');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('Ocurrió un error al iniciar sesión.');
-      }
-    });
-  </script>
+  <!-- Referencia al archivo JavaScript externo -->
+  <script src="login.js"></script>
 
   <!-- Font Awesome para los íconos -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
