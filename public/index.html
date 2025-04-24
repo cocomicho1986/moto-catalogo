@@ -3,24 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienvenido</title>
+  <title>Bienvenido a MotoApp</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <header>
-    <h1>Bienvenido a Mi Aplicación</h1>
-  </header>
+  <!-- Contenedor Principal -->
+  <div class="container">
+    <!-- Encabezado -->
+    <header class="header">
+      <h1 class="logo">MotoApp</h1>
+      <!-- Contenedor para el botón discreto -->
+      <div id="dashboard-button-container" class="dashboard-button-container"></div>
+    </header>
 
-  <main>
-    <div class="buttons-container">
-      <a href="/motos-public.html" class="btn">Ver motos</a>
-      <a href="/videos-public.html" class="btn">Ver Videos Públicos</a>
-      <a href="/login.html" class="btn">Iniciar Sesión</a>
-    </div>
-  </main>
+    <!-- Sección Hero sin Imagen -->
+    <section class="hero no-image">
+      <div class="hero-content">
+        <h2>Descubre el Mundo de las Motos</h2>
+        <p>Explora nuestras colecciones exclusivas, videos y más.</p>
+        <div class="buttons">
+          <a href="/motos-public.html" class="btn btn-primary">Ver Motos</a>
+          <a href="/videos-public.html" class="btn btn-secondary">Ver Videos</a>
+        </div>
+      </div>
+    </section>
 
-  <footer>
-    <p>&copy; 2023 Mi Aplicación. Todos los derechos reservados.</p>
-  </footer>
+    <!-- Sección de Estadísticas Provisorias -->
+    <section class="stats">
+      <div class="stat">
+        <i class="fas fa-motorcycle stat-icon"></i>
+        <h3>Modelos Disponibles</h3>
+        <p class="stat-value">50+</p>
+      </div>
+      <div class="stat">
+        <i class="fas fa-users stat-icon"></i>
+        <h3>Usuarios Registrados</h3>
+        <p class="stat-value">1,200+</p>
+      </div>
+      <div class="stat">
+        <i class="fas fa-video stat-icon"></i>
+        <h3>Videos Publicados</h3>
+        <p class="stat-value">300+</p>
+      </div>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer class="footer">
+      <p>&copy; 2023 MotoApp. Todos los derechos reservados.</p>
+      <a href="/login.html" class="login-link">Iniciar Sesión</a>
+    </footer>
+  </div>
+
+  <script src="script.js"></script> <!-- Asegúrate de incluir este archivo -->
 </body>
 </html>

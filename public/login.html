@@ -4,19 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="login.css"> <!-- CSS personalizado -->
 </head>
 <body>
-  <h2 ><a href="/index.html">Regresar</a></h2>
-  <h1>Iniciar Sesión</h1>
-  <form id="loginForm">
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" required>
-    <label for="clave">Contraseña:</label>
-    <input type="password" id="clave" name="clave" required>
-    <button type="submit">Iniciar Sesión</button>
-  </form>
+  <!-- Contenedor Principal -->
+  <div class="login-container">
+    <!-- Encabezado -->
+    <header class="login-header">
+      <h2><a href="/index.html" class="back-link"><i class="fas fa-arrow-left"></i> Regresar</a></h2>
+      <h1>Iniciar Sesión</h1>
+    </header>
 
+    <!-- Formulario de Login -->
+    <form id="loginForm" class="login-form">
+      <div class="input-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+      <div class="input-group">
+        <label for="clave">Contraseña:</label>
+        <input type="password" id="clave" name="clave" required>
+      </div>
+      <button type="submit" class="btn-login">Iniciar Sesión</button>
+    </form>
+  </div>
+
+  <!-- Script para manejar el login -->
   <script>
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault(); // Evitar que el formulario se envíe de forma tradicional
@@ -47,5 +60,8 @@
       }
     });
   </script>
+
+  <!-- Font Awesome para los íconos -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </body>
 </html>

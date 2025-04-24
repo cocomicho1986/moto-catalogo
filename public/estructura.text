@@ -14,10 +14,11 @@
     script.js        # Lógica frontend
   /routes            # Rutas modulares
     auth.js          # Rutas de autenticación
-    items.js         # CRUD para la tabla `items`
-    items-public.js
-    tb_vd1.js        # CRUD para la tabla `tb_vd1`
-    tb_vd1-public.js
+    motos-public.js
+    motos.js
+    motosScripts.js
+    tabla_video-public.js
+    tabla_video.js
     usuarios.js
   /middleware        # Middlewares personalizados
     authMiddleware.js # Middleware para proteger rutas privadas

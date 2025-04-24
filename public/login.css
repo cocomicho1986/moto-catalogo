@@ -1,0 +1,113 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Estilos generales */
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #2c3e50); /* Gradiente oscuro */
+    color: #ffffff;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Encabezado */
+  .login-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .login-header h1 {
+    font-size: 2rem;
+    color: #ff4500; /* Naranja vibrante */
+    margin-bottom: 10px;
+  }
+  
+  .back-link {
+    color: #ff4500;
+    text-decoration: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .back-link i {
+    transition: transform 0.3s ease;
+  }
+  
+  .back-link:hover i {
+    transform: translateX(-5px);
+  }
+  
+  /* Formulario de Login */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #ffffff;
+  }
+  
+  .input-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  .input-group input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.2); /* Cambio de fondo al enfocar */
+  }
+  
+  .btn-login {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #ff4500; /* Naranja vibrante */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-login:hover {
+    background-color: #ffa500; /* Amarillo naranja */
+    transform: scale(1.05);
+  }
+  
+  /* Mensajes de Error */
+  .error-message {
+    color: #ff4500;
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
