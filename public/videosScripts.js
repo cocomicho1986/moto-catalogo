@@ -125,7 +125,7 @@ function displayVideos(videos) {
 <td><button onclick="deleteVideo(${video.id})">Eliminar</button></td>
 </tr>
 <tr>
-<td>Descripcion:</td><td data-fulltext="${video.desc_vd1}">${video.desc_vd1}<span class="tooltip"></span></td>
+<td>Descripcion:</td><td>${video.desc_vd1}</td>
 </tr>
 <tr>
 <td>Fecha:</td><td>${video.fecha1}</td>

@@ -121,7 +121,7 @@ function displayVideos(videos) {
       <table class="videos-table" style="margin-bottom: 20px; width: 100%; border-collapse: collapse;">
 
 <tr>
-<td>Descripcion:</td><td data-fulltext="${video.desc_vd1}">${video.desc_vd1}<span class="tooltip"></span></td>
+<td>Descripcion:</td><td>${video.desc_vd1}</td>
 </tr>
 <tr>
 <td>Fecha:</td><td>${video.fecha1}</td>
