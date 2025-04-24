@@ -56,7 +56,7 @@ if (!fs.existsSync(indexPath)) {
 console.log('[BACKEND] [INICIALIZACIÓN] Archivo "index.html" verificado correctamente.');
 
 // Verificar si otros archivos críticos existen
-const criticalFiles = ['login.html', 'style.css', 'script.js'].map(file => path.join(publicDir, file));
+const criticalFiles = ['login.html', 'style.css', 'login.js'].map(file => path.join(publicDir, file));
 criticalFiles.forEach(file => {
   if (!fs.existsSync(file)) {
     console.error(`[BACKEND] [ERROR] Archivo crítico no encontrado: ${file}`);
@@ -138,9 +138,12 @@ app.get('/last-ping.json', (req, res) => {
 // Middleware para manejar errores 404
 app.use((req, res) => {
   console.error('[BACKEND] [ERROR] Ruta no encontrada:', req.url);
+  console.error('[BACKEND] [ERROR] Método HTTP:', req.method);
+  console.error('[BACKEND] [ERROR] Encabezados:', req.headers);
+  console.error('[BACKEND] [ERROR] Dirección IP del cliente:', req.ip);
+
   res.status(404).send('Ruta no encontrada.');
 });
-
 // Manejador de errores globales
 process.on('uncaughtException', (error) => {
   console.error('[BACKEND] [ERROR GLOBAL] Error no manejado:', error.message);
