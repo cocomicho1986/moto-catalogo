@@ -54,11 +54,43 @@ body {
 /* Fondo dinámico */
 .fondo {
   position: relative;
-  width: 100%; /* Ancho completo por defecto */
-  height: 100vh; /* Altura completa de la pantalla por defecto */
+  width: 99%; /* Ancho completo por defecto */
+  height: 75vh; /* Altura completa de la pantalla por defecto */
   background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor */
   background-position: center; /* Centra la imagen */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+/* Contenedor para los botones en el fondo */
+.fondo-buttons {
+  position: absolute;
+  bottom: 20px; /* Distancia desde la parte inferior */
+  left: 50%; /* Centrado horizontal */
+  transform: translateX(-50%); /* Ajuste para centrar correctamente */
+  display: flex;
+  gap: 15px; /* Espacio entre botones */
+  z-index: 5; /* Asegurarse de que los botones estén encima del fondo */
+}
+
+/* Estilo de los botones en el fondo */
+.fondo-buttons .btn {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+  background-color: #ffffff; /* Fondo blanco para los botones */
+  transition: all 0.3s ease; /* Animación suave */
+}
+
+/* Hover para los botones */
+.fondo-buttons .btn:hover {
+  transform: scale(1.1); /* Aumentar el tamaño al pasar el mouse */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
 }
 
 /* Banner dinámico */
@@ -70,9 +102,6 @@ body {
   background-position: center; /* Centra la imagen */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
   margin-top: -50px; /* Superposición ligera con el fondo */
- 
-  
-  
 }
 
 /* Overlay semi-transparente para mejorar la legibilidad */
@@ -93,26 +122,8 @@ body {
 .banner-content {
   position: relative;
   z-index: 2;
-  text-align: center;
+  text-align: left;
   color: #ff7e5f;
   padding-top: 50px; /* Espaciado desde la parte superior */
-  
-}
-
-.buttons {
-  display: flex;
-  justify-content: left;
-  gap: 15px;
-}
-
-.btn {
-  padding: 10px 20px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  text-decoration: none;
-  color: black;
-  font-weight: bolder;
+  margin: 5px;
 }

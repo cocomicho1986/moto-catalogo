@@ -22,19 +22,21 @@ function displayPortada(portada) {
     return;
   }
 
-  // Crear el HTML para el banner con el fondo y el banner dinámicos
+  // Crear el HTML para el fondo y el banner
   const html = `
     <div class="fondo" style="background-image: url('${portada.fondo || ''}');">
-      <div class="banner" style="background-image: url('${portada.banner || ''}');">
-        <div class="banner-content">
-          <h1>${portada.titulo}</h1>
-          <p>${portada.subtitulo}</p>
-          <div class="buttons">
-            <a href="contacto-publico.html" class="btn btn-primary">Contacto</a>
-            <a href="/motos-public.html" class="btn btn-primary">Ver Motos</a>
-            <a href="/videos-public.html" class="btn btn-secondary">Ver Videos</a>
-          </div>
-        </div>
+      <!-- Botones movidos al fondo -->
+      <div class="fondo-buttons">
+        <a href="contacto-publico.html" class="btn btn-primary">Contacto</a>
+        <a href="/motos-public.html" class="btn btn-primary">Ver Motos</a>
+        <a href="/videos-public.html" class="btn btn-secondary">Ver Videos</a>
+      </div>
+    </div>
+
+    <div class="banner" style="background-image: url('${portada.banner || ''}');">
+      <div class="banner-content">
+        <h1>${portada.titulo}</h1>
+        <p>${portada.subtitulo}</p>
       </div>
     </div>
   `;
