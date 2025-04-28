@@ -54,11 +54,21 @@ body {
 /* Fondo dinámico */
 .fondo {
   position: relative;
-  width: 99%; /* Ancho completo por defecto */
-  height: 75vh; /* Altura completa de la pantalla por defecto */
+  width: 100%; /* Ancho completo */
+  height: 75vh; /* Altura predeterminada */
+  min-height: 400px; /* Altura mínima para pantallas pequeñas */
+  max-height: 100vh; /* Altura máxima para pantallas grandes */
   background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor */
   background-position: center; /* Centra la imagen */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
+  image-rendering: high-quality; /* Mejora la calidad de la imagen */
+}
+
+/* Media Query para dispositivos móviles */
+@media (max-width: 768px) {
+  .fondo {
+    height: 50vh; /* Altura reducida para dispositivos móviles */
+  }
 }
 
 /* Contenedor para los botones en el fondo */
@@ -123,7 +133,8 @@ body {
   position: relative;
   z-index: 2;
   text-align: left;
-  color: #ff7e5f;
+  color: blue;
   padding-top: 50px; /* Espaciado desde la parte superior */
   margin: 5px;
+  font-weight: bold;
 }
