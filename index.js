@@ -10,6 +10,12 @@ const tabla_videoRoutes = require('./routes/tabla_video'); // CRUD privado para 
 const tabla_videoPRoutes = require('./routes/tabla_video-public'); // CRUD público para la tabla `tb_vd1`
 const usuariosRoutes = require('./routes/usuarios'); // CRUD privado para la tabla `usuarios`
 const motosPRoutes = require('./routes/motos-public'); // Rutas públicas para leer ítems
+// Importar rutas modulares adicionales
+const contactoPublicoRoutes = require('./routes/contacto-publicoB'); // Rutas públicas para contacto
+const contactoPrivadoRoutes = require('./routes/contacto-privadoB'); // Rutas privadas para contacto
+// Importar rutas para la portada
+const portadaPublicaRoutes = require('./routes/portada-publicaB'); // Backend sin CRUD para la portada pública
+const portadaPrivadaRoutes = require('./routes/portada-privadaB'); // Backend con CRUD para la portada privada
 
 // Crear una instancia de Express
 const app = express();
@@ -47,16 +53,16 @@ if (!fs.existsSync(publicDir)) {
 }
 console.log('[BACKEND] [INICIALIZACIÓN] Carpeta "public" verificada correctamente.');
 
-// Verificar si el archivo index.html existe
-const indexPath = path.join(publicDir, 'index.html');
-if (!fs.existsSync(indexPath)) {
-  console.error('[BACKEND] [ERROR] El archivo "index.html" no existe en la carpeta "public".');
+// Verificar si el archivo portada-publica.html existe (CAMBIO DESTACADO)
+const portadaPublicaPath = path.join(publicDir, 'portada-publica.html');
+if (!fs.existsSync(portadaPublicaPath)) {
+  console.error('[BACKEND] [ERROR] El archivo "portada-publica.html" no existe en la carpeta "public".');
   process.exit(1); // Detiene el servidor si el archivo no existe
 }
-console.log('[BACKEND] [INICIALIZACIÓN] Archivo "index.html" verificado correctamente.');
+console.log('[BACKEND] [INICIALIZACIÓN] Archivo "portada-publica.html" verificado correctamente.');
 
 // Verificar si otros archivos críticos existen
-const criticalFiles = ['login.html', 'style.css', 'login.js'].map(file => path.join(publicDir, file));
+const criticalFiles = ['login.html', 'style.css', 'login.js', 'portada-publica.html'].map(file => path.join(publicDir, file));
 criticalFiles.forEach(file => {
   if (!fs.existsSync(file)) {
     console.error(`[BACKEND] [ERROR] Archivo crítico no encontrado: ${file}`);
@@ -65,7 +71,19 @@ criticalFiles.forEach(file => {
 });
 console.log('[BACKEND] [INICIALIZACIÓN] Todos los archivos críticos en "public" verificados correctamente.');
 
-app.use(express.static(publicDir)); // Sirve archivos estáticos desde la carpeta `public`
+// Ruta predeterminada para servir portada-publica.html (COLOCAR ANTES DE express.static)
+app.get('/', (req, res) => {
+  console.log('[BACKEND] [INICIALIZACIÓN] Sirviendo archivo "portada-publica.html" como página principal.');
+  res.sendFile(path.join(publicDir, 'portada-publica.html'), (err) => {
+    if (err) {
+      console.error('[BACKEND] [ERROR] Error al enviar el archivo "portada-publica.html":', err.message);
+      res.status(500).send('Error interno del servidor.');
+    }
+  });
+});
+
+// Middleware para servir archivos estáticos
+app.use(express.static(publicDir));
 console.log(`[BACKEND] [INICIALIZACIÓN] Archivos estáticos cargados desde: ${publicDir}`);
 
 // Centralizar la lógica de la ruta de la base de datos
@@ -120,6 +138,12 @@ app.use('/api/tabla_video', tabla_videoRoutes); // CRUD privado para la tabla `t
 app.use('/api/public/tabla_video-public', tabla_videoPRoutes); // CRUD público para la tabla `tb_vd1`
 app.use('/api/usuarios', usuariosRoutes); // CRUD privado para la tabla `usuarios`
 app.use('/api/public/motos-public', motosPRoutes); // Rutas públicas para leer motos public
+// Usar los routers modulares adicionales
+app.use('/api/contacto-publico', contactoPublicoRoutes); // CRUD público para la tabla `contacto`
+app.use('/api/contacto-privado', contactoPrivadoRoutes); // CRUD privado para la tabla `contacto`
+// Agregar las nuevas rutas para la portada (CAMBIO DESTACADO)
+app.use('/api/portada-publica', portadaPublicaRoutes); // Backend público para la portada
+app.use('/api/portada-privada', portadaPrivadaRoutes); // Backend privado para la portada
 console.log('[BACKEND] [INICIALIZACIÓN] Todas las rutas modulares registradas correctamente.');
 
 // Ruta para servir el archivo last-ping.json
@@ -144,6 +168,7 @@ app.use((req, res) => {
 
   res.status(404).send('Ruta no encontrada.');
 });
+
 // Manejador de errores globales
 process.on('uncaughtException', (error) => {
   console.error('[BACKEND] [ERROR GLOBAL] Error no manejado:', error.message);
