@@ -1,6 +1,7 @@
 const express = require('express');
 const Database = require('better-sqlite3');
 const path = require('path');
+const { isAuthenticated } = require('../middleware/authMiddleware');
 const router = express.Router();
 
 // Ruta de la base de datos
@@ -128,7 +129,7 @@ function extractYouTubeInfo(videoUrl) {
 }
 
 // Ruta pública: Obtener videos
-router.get('/public', (req, res) => {
+router.get('/',isAuthenticated, (req, res) => {
   console.log('[DEPURACIÓN] Solicitando videos desde la base de datos...'); // Depuración
   try {
     const sqlVideos = 'SELECT * FROM tabla_video';
@@ -141,7 +142,7 @@ router.get('/public', (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/',isAuthenticated, (req, res) => {
   const { desc_vd1, video } = req.body;
 
   // Validar que se proporcione una URL de video
@@ -178,7 +179,7 @@ router.post('/', (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id',isAuthenticated, (req, res) => {
   const { id } = req.params; // ID del video a actualizar
   const { desc_vd1, fecha1, video } = req.body;
 
@@ -258,7 +259,7 @@ router.put('/:id', (req, res) => {
 });
 
 // Ruta para eliminar un video
-router.delete('/:id', (req, res) => {
+router.delete('/:id',isAuthenticated, (req, res) => {
   const { id } = req.params;
 
   try {
@@ -277,7 +278,7 @@ router.delete('/:id', (req, res) => {
 });
 
 // Ruta para restaurar la tabla
-router.post('/restore', (req, res) => {
+router.post('/restore',isAuthenticated, (req, res) => {
   console.log('[DEPURACIÓN] Solicitando restauración de la tabla...'); // Depuración
 
   try {

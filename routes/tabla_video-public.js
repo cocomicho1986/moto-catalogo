@@ -49,7 +49,7 @@ function extractYouTubeId(videoUrl) {
 }
 
 // Ruta pública: Obtener videos
-router.get('/public', (req, res) => {
+router.get('/', (req, res) => {
   console.log('[DEPURACIÓN] Solicitando videos desde la base de datos...'); // Depuración
   try {
     const sqlVideos = 'SELECT * FROM tabla_video';

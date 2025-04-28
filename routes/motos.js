@@ -46,7 +46,7 @@ try {
 }
 
 // Obtener todos los ítems
-router.get('/api/motos', isAuthenticated, (req, res) => {
+router.get('/', isAuthenticated, (req, res) => {
   console.log("Consultando todos los ítems...");
   try {
     const sql = 'SELECT id, marca, modelo, motor, tipo, precio, imagen FROM tabla_catalogo';
@@ -198,7 +198,7 @@ router.delete('/:id', isAuthenticated, (req, res) => {
   }
 });
 // Ruta para restaurar la tabla
-router.post('/restore', (req, res) => {
+router.post('/restore',isAuthenticated, (req, res) => {
   console.log('[DEPURACIÓN] Solicitando restauración de la tabla...'); // Depuración
 
   try {
