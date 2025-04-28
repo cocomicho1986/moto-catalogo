@@ -1,19 +1,12 @@
-let currentContacts = [];
-
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadContacts();
-});
-
 // Cargar los contactos existentes
 async function loadContacts() {
   try {
     const response = await fetch('/api/contacto-privado/contactos', {
       method: 'GET',
-      credentials: 'include' // Asegúrate de incluir cookies si usas sesiones
+      credentials: 'include'
     });
     if (!response.ok) throw new Error('Error al cargar los contactos.');
     const { contactos } = await response.json();
-
     displayContacts(contactos); // Mostrar los contactos
   } catch (error) {
     console.error('[FRONTEND] Error al cargar contactos:', error.message);
@@ -31,8 +24,6 @@ function displayContacts(contacts) {
 
   const list = contacts.map(contacto => `
     <div class='eb'>
-    <!-- Botón para restaurar la tabla -->
-<button id="restoreTableButton" onclick="restoreTable()">Restaurar Tabla</button>
       <button onclick="editContact(${contacto.id}, '${contacto.email}', '${contacto.direccion}', '${contacto.telefono}')">Editar</button>
       <button onclick="deleteContact(${contacto.id})">Eliminar</button>
     </div>  
@@ -72,7 +63,7 @@ async function deleteContact(id) {
   try {
     const response = await fetch(`/api/contacto-privado/contactos/${id}`, {
       method: 'DELETE',
-      credentials: 'include' // Asegúrate de incluir cookies si usas sesiones
+      credentials: 'include'
     });
 
     if (!response.ok) throw new Error('Error al eliminar el contacto.');
@@ -103,7 +94,7 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, direccion, telefono }),
-      credentials: 'include' // Asegúrate de incluir cookies si usas sesiones
+      credentials: 'include'
     });
 
     if (!response.ok) {
@@ -121,27 +112,5 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
   }
 });
 
-// Restaurar la tabla
-async function restoreTable() {
-  if (!confirm('¿Estás seguro de que quieres restaurar la tabla? Esto eliminará todos los cambios actuales.')) return;
-
-  try {
-    const response = await fetch('/api/contacto-privado/restore', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include' // Asegúrate de incluir cookies si usas sesiones
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Error desconocido.');
-    }
-
-    const result = await response.json();
-    alert(result.mensaje || 'Tabla restaurada exitosamente.');
-    loadContacts(); // Recargar los contactos para reflejar los cambios
-  } catch (error) {
-    console.error('[FRONTEND] Error al restaurar la tabla:', error.message);
-    alert(`Ocurrió un error al restaurar la tabla: ${error.message}`);
-  }
-}
+// Cargar los contactos al iniciar la página
+loadContacts();
