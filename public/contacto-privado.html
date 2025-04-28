@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contactos Privados</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="contacto-privado.css">
+</head>
+<body>
+  <header>
+    <p><a href="portada-publica.html">Regresar</a></p>
+  
+  </header>
+  <h1>Contactos Privados</h1>
+
+  <!-- Contenedor principal -->
+  <div class="main-container">
+    <!-- Formulario para crear/editar contactos -->
+    <form id="contactForm">
+      <input type="hidden" id="contactId">
+      <label for="email">Email:</label>
+      <input type="text" id="email" required>
+      <label for="direccion">Dirección:</label>
+      <input type="text" id="direccion" required>
+      <label for="telefono">Teléfono:</label>
+      <input type="text" id="telefono" required>
+      <button type="submit">Guardar</button>
+      <button type="button" id="cancelButton" style="display: none;" onclick="resetForm()">Cancelar</button>
+    </form>
+
+    <!-- Contenedor para mostrar los contactos -->
+    <div id="contacts-list"></div>
+  </div>
+
+  <script src="contacto-privadoF.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+/* Estilo para la tabla de contactos públicos */
+#contactTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#contactTable th, #contactTable td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}

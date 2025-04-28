@@ -127,7 +127,7 @@ main {
 .filters button:hover {
   background-color: #218838;
 }
-
+/*Aca se encuentra el contenedor con dashboard vertical */
 #items-list {
   flex: 2; /* La tabla ocupa 2 partes del espacio */
   max-width: 600px; /* Reducimos el ancho máximo de la tabla */
@@ -136,8 +136,8 @@ main {
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  max-height: 600px; /* Altura máxima de la tabla */
-  overflow-y: auto; /* Barra de desplazamiento vertical */
+  max-height: 600px; /* Altura máxima de la tabla linea critica */
+  overflow-y: auto; /* Barra de desplazamiento vertical linea critica */
   text-align: center;
   
 }

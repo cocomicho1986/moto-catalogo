@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Portada</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .preview img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .actions button {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p><a href="portada-publica.html">Regresar</a></p>
+  
+  </header>
+  <h1>Gestión de Portada</h1>
+
+  <!-- Formulario para cargar/editar la portada -->
+  <form id="portadaForm">
+    <input type="hidden" id="id" name="id">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" required placeholder="Título">
+
+    <label for="subtitulo">Subtítulo:</label>
+    <input type="text" id="subtitulo" name="subtitulo" required placeholder="Subtítulo">
+
+    <label for="fondoFile">Imagen de Fondo:</label>
+    <input type="file" id="fondoFile" accept="image/*">
+    <input type="hidden" id="fondo" name="fondo">
+    <div id="fondo-preview"></div>
+
+    <label for="bannerFile">Banner:</label>
+    <input type="file" id="bannerFile" accept="image/*">
+    <input type="hidden" id="banner" name="banner">
+    <div id="banner-preview"></div>
+
+    <button type="submit">Guardar Portada</button>
+    <button type="button" id="cancelButton" style="display: none;" onclick="resetForm()">Cancelar</button>
+  </form>
+
+  <!-- Botones adicionales -->
+  <div class="actions">
+    <button onclick="deletePortada()">Eliminar Portada</button>
+    <button onclick="restoreTable()">Restaurar Tabla</button>
+  </div>
+
+  <!-- Contenedor para mostrar la portada actual -->
+  <div id="portada-container"></div>
+
+  <!-- Archivo JS -->
+  <script src="portada-privadaF.js"></script>
+</body>
+</html>

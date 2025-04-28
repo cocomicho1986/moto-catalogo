@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienvenido a MotoApp</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Portada Pública - MotoApp</title>
+  <!-- Enlazar el archivo CSS -->
+  <link rel="stylesheet" href="portada-publica.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -20,31 +21,33 @@
     <!-- Sección Hero sin Imagen -->
     <section class="hero no-image">
       <div class="hero-content">
-        <h2>Descubre el Mundo de las Motos</h2>
+        <h2>Bienvenido a MotoApp</h2>
         <p>Explora nuestras colecciones exclusivas, videos y más.</p>
         <div class="buttons">
+          <a href="contacto-publico.html">Contacto Público</a> <!-- Enlace al contacto público -->
           <a href="/motos-public.html" class="btn btn-primary">Ver Motos</a>
           <a href="/videos-public.html" class="btn btn-secondary">Ver Videos</a>
         </div>
       </div>
     </section>
 
-    <!-- Sección de Estadísticas Provisorias -->
-    <section class="stats">
-      <div class="stat">
-        <i class="fas fa-motorcycle stat-icon"></i>
-        <h3>Modelos Disponibles</h3>
-        <p class="stat-value">50+</p>
+    <!-- Contenedor para los Datos de la Portada -->
+    <section class="portada-container">
+      <div class="portada-item" id="titulo-container">
+        <h2>Título:</h2>
+        <p id="titulo">Cargando...</p>
       </div>
-      <div class="stat">
-        <i class="fas fa-users stat-icon"></i>
-        <h3>Usuarios Registrados</h3>
-        <p class="stat-value">1,200+</p>
+      <div class="portada-item" id="subtitulo-container">
+        <h2>Subtítulo:</h2>
+        <p id="subtitulo">Cargando...</p>
       </div>
-      <div class="stat">
-        <i class="fas fa-video stat-icon"></i>
-        <h3>Videos Publicados</h3>
-        <p class="stat-value">300+</p>
+      <div class="portada-item" id="fondo-container">
+        <h2>Fondo:</h2>
+        <img id="fondo" src="" alt="Fondo de la portada" style="display: none;">
+      </div>
+      <div class="portada-item" id="banner-container">
+        <h2>Banner:</h2>
+        <img id="banner" src="" alt="Banner de la portada" style="display: none;">
       </div>
     </section>
 
@@ -55,6 +58,7 @@
     </footer>
   </div>
 
-  <script src="login.js"></script> <!-- Asegúrate de incluir este archivo -->
+  <!-- Archivos JS -->
+  <script src="portada-publicaF.js"></script>
 </body>
 </html>

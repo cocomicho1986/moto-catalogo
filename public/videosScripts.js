@@ -42,7 +42,7 @@ function initializeTooltips() {
 // Cargar los videos existentes
 async function loadVideos() {
   try {
-    const response = await fetch('/api/tabla_video/public');
+    const response = await fetch('/api/tabla_video');
     if (!response.ok) throw new Error('Error al cargar los videos.');
     const data = await response.json();
 

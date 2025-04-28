@@ -2,7 +2,10 @@
 async function loadItems() {
   console.log("Cargando ítems desde el backend...");
   try {
-    const response = await fetch('api/public/motos-public');
+    const response = await fetch('/api/motos', {
+      method: 'GET',
+      credentials: 'include' // Asegúrate de incluir cookies si usas sesiones
+    });
     if (!response.ok) throw new Error('Error al cargar los ítems.');
     const items = await response.json();
     populateFilters(items); // Llenar los filtros con datos
@@ -87,11 +90,6 @@ function displayItems(items) {
     <td class="contenido">${item.precio}</td>
   </tr>
 </table>
-
-
-  
-  
-  
 </div>
   `).join('');
   container.innerHTML = list;
@@ -104,7 +102,10 @@ function applyFilters() {
   const tipo = document.getElementById('filterTipo').value;
   const precio = document.getElementById('filterPrecio').value;
 
-  fetch('api/public/motos-public') // Usar la misma ruta que en loadItems
+  fetch('/api/motos', {
+    method: 'GET',
+    credentials: 'include' // Asegúrate de incluir cookies si usas sesiones
+  })
     .then(response => response.json())
     .then(items => {
       const filteredItems = items.filter(item => {
@@ -200,9 +201,10 @@ document.getElementById('itemForm').addEventListener('submit', async (e) => {
     }
 
     const response = await fetch(url, {
-      method: method,
+      method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
+      credentials: 'include' // Asegúrate de incluir cookies si usas sesiones
     });
 
     const result = await response.json();
@@ -226,6 +228,7 @@ async function deleteItem(id) {
   try {
     const response = await fetch(`/api/motos/${id}`, {
       method: 'DELETE',
+      credentials: 'include' // Asegúrate de incluir cookies si usas sesiones
     });
 
     const result = await response.json();
@@ -240,6 +243,7 @@ async function deleteItem(id) {
     alert('Ocurrió un error al eliminar el ítem.');
   }
 }
+
 // Función para restaurar la tabla
 async function restoreTable() {
   if (!confirm('¿Estás seguro de que quieres restaurar la tabla? Esto eliminará todos los cambios actuales.')) return;
@@ -248,13 +252,14 @@ async function restoreTable() {
     const response = await fetch('/api/motos/restore', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include' // Asegúrate de incluir cookies si usas sesiones
     });
 
     if (!response.ok) throw new Error('Error al restaurar la tabla.');
 
     const result = await response.json();
     alert(result.mensaje || 'Tabla restaurada exitosamente.');
-    loadItems(); // Recargar los videos para reflejar los cambios
+    loadItems(); // Recargar los ítems para reflejar los cambios
   } catch (error) {
     console.error('Error:', error);
     alert('Ocurrió un error al restaurar la tabla.');

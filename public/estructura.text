@@ -11,7 +11,17 @@
     gestion-usuarios.html
     dashboard.html   # Página privada (dashboard)
     style.css        # Estilos globales
-    script.js        # Lógica frontend
+    login.js        # Lógica frontend
+    contacto-publicoF.js
+    contacto-privadoF.js
+    contacto-publico.html
+    contacto-privado.html
+    contacto-publico.css
+    contacto-privado.css
+    portada-publica.html
+    portada-privada.html
+    portada-publicaF.js
+    portada-privadaF.js
   /routes            # Rutas modulares
     auth.js          # Rutas de autenticación
     motos-public.js
@@ -20,6 +30,10 @@
     tabla_video-public.js
     tabla_video.js
     usuarios.js
+    contacto-publicoB.js
+    contacto-privadoB.js
+    portada-publicaB.js 
+    portada-privadaB.js
   /middleware        # Middlewares personalizados
     authMiddleware.js # Middleware para proteger rutas privadas
   index.js           # Archivo principal del backend

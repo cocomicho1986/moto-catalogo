@@ -1,0 +1,165 @@
+/* Estilo general */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f9f9f9;
+  text-align: center; /* Centrar elementos principales */
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Contenedor principal */
+.main-container {
+  display: flex; /* Usar flexbox para colocar elementos uno al lado del otro */
+  justify-content: space-between; /* Espacio entre el formulario y la tabla */
+  align-items: flex-start; /* Alinear elementos al inicio verticalmente */
+  gap: 20px; /* Espaciado entre el formulario y la tabla */
+  max-width: 1200px; /* Ancho máximo del contenedor */
+  margin: 0 auto; /* Centrar el contenedor */
+}
+
+/* Formulario */
+form {
+  width: 300px; /* Ancho fijo para el formulario */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Alinear texto a la izquierda dentro del formulario */
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #555;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px; /* Botones redondeados */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3; /* Cambio de color al pasar el mouse */
+}
+
+form button#cancelButton {
+  background-color: #ff4d4d; /* Botón de cancelar en rojo */
+}
+
+form button#cancelButton:hover {
+  background-color: #cc0000; /* Rojo más oscuro */
+}
+
+/* Tabla */
+#contacts-list {
+  flex-grow: 1; /* Hacer que la tabla ocupe el espacio restante */
+  text-align: left; /* Alinear texto a la izquierda dentro de la tabla */
+}
+
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden; /* Para que los bordes redondeados funcionen correctamente */
+}
+
+.item-table td {
+  padding: 10px;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+}
+
+.item-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternancia de colores en las filas */
+}
+
+.etiquetas {
+  font-weight: bold;
+  width: 30%; /* Ancho fijo para las etiquetas */
+  text-align: right;
+  padding-right: 10px;
+  color: #333;
+}
+
+.contenido {
+  width: 70%; /* Ancho fijo para el contenido */
+  color: #555;
+}
+
+/* Botones de edición y eliminación */
+.eb {
+  margin-bottom: 10px;
+}
+
+.eb button {
+  padding: 8px 15px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.eb button:hover {
+  transform: scale(1.05); /* Efecto de agrandamiento al pasar el mouse */
+}
+
+.eb button:nth-child(1) {
+  background-color: #28a745; /* Botón Editar en verde */
+  color: white;
+}
+
+.eb button:nth-child(1):hover {
+  background-color: #218838; /* Verde más oscuro */
+}
+
+.eb button:nth-child(2) {
+  background-color: #dc3545; /* Botón Eliminar en rojo */
+  color: white;
+}
+
+.eb button:nth-child(2):hover {
+  background-color: #bd2130; /* Rojo más oscuro */
+}
+
+/* Botón Restaurar Tabla */
+#restoreTableButton {
+  display: block;
+  margin: 20px auto; /* Centrar el botón */
+  padding: 10px 20px;
+  background-color: #ffc107; /* Amarillo llamativo */
+  color: #333;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#restoreTableButton:hover {
+  background-color: #e0a800; /* Amarillo más oscuro */
+}
