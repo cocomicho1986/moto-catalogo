@@ -120,7 +120,7 @@ h2 a:hover {
 
 #videos {
   max-height: 500px; /* Altura máxima para activar la barra de desplazamiento */
-  max-width: 400px;
+  max-width: 500px;
   overflow-y: auto; /* Barra de desplazamiento vertical */
   padding: 20px;
   border: 1px solid #ecf0f1;
