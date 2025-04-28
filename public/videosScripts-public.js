@@ -1,44 +1,3 @@
-let currentVideoId = null;
-
-//tooltip
-function initializeTooltips() {
-  const cells = document.querySelectorAll("td");
-
-  // Límite de caracteres regulable
-  const maxLength = 500;
-
-  cells.forEach(cell => {
-    const tooltip = cell.querySelector(".tooltip");
-
-    if (tooltip) {
-      console.log("Tooltip encontrado en la celda:", cell);
-
-      const fullText = cell.getAttribute("data-fulltext") || cell.textContent.trim();
-      console.log("Texto completo extraído:", fullText);
-
-      // Si el texto supera el límite, truncarlo y agregar puntos suspensivos
-      if (fullText.length > maxLength) {
-        const truncatedText = fullText.substring(0, maxLength) + "...";
-
-        // Crear un contenedor para el texto truncado
-        const textContainer = document.createElement("span");
-        textContainer.textContent = truncatedText;
-
-        // Limpiar el contenido de la celda, pero preservar el tooltip
-        cell.textContent = ""; // Vaciar solo el texto
-        cell.appendChild(textContainer); // Agregar el texto truncado
-
-        console.log("Texto truncado agregado a la celda:", truncatedText);
-      }
-
-      // Asignar el texto completo al tooltip
-      tooltip.textContent = fullText;
-      console.log("Texto asignado al tooltip:", fullText);
-    } else {
-      console.log("No se encontró ningún tooltip en esta celda:", cell);
-    }
-  });
-}
 // Cargar los videos existentes
 async function loadVideos() {
   try {
@@ -119,28 +78,26 @@ function displayVideos(videos) {
     const videoElement = document.createElement('div');
     videoElement.innerHTML = `
       <table class="videos-table" style="margin-bottom: 20px; width: 100%; border-collapse: collapse;">
-
-<tr>
-<td>Descripcion:</td><td>${video.desc_vd1}</td>
-</tr>
-<tr>
-<td>Fecha:</td><td>${video.fecha1}</td>
-</tr>
-<tr>
-<td colspan="2"><iframe width="300" height="300" src="https://www.youtube.com/embed/${video.video1}" frameborder="0" allowfullscreen></iframe></td>
-</tr>
-</table>
-      
-      
+        <tr>
+          <td>Descripción:</td>
+          <td>${video.desc_vd1}</td>
+        </tr>
+        <tr>
+          <td>Fecha:</td>
+          <td>${video.fecha1}</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <iframe width="300" height="300" src="https://www.youtube.com/embed/${video.video1}" frameborder="0" allowfullscreen></iframe>
+          </td>
+        </tr>
+      </table>
     `;
     container.appendChild(videoElement);
   });
-  // Inicializar los tooltips después de renderizar los videos
-  initializeTooltips();
 }
 
-
-
-
-// Cargar los videos al cargar la página
-loadVideos();
+// Asegurarse de que loadVideos() se ejecute cuando la página cargue
+document.addEventListener('DOMContentLoaded', () => {
+  loadVideos();
+});
