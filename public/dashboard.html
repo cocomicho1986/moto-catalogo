@@ -19,9 +19,9 @@
     <nav class="dashboard-nav">
       <ul>
         <li><a href="/videos-private.html"><i class="fas fa-video"></i> Administrar Videos</a></li>
-        <li><a href="/motos-private.html"><i class="fas fa-motorcycle"></i> Administrar Motos</a></li>
-        <a href="portada-privada.html" target="_blank">editar portada</a> <!-- Enlace al contacto público -->
-        <a href="contacto-privado.html">Contacto Privado</a><!-- Enlace al contacto privado -->
+        <li><a href="/motos-private.html"><i class="fas fa-motorcycle"></i> Catalogo</a></li>
+        <li><a href="/portada-privada.html"><i class="fas fa-motorcycle"></i> Portada</a></li>
+        <li><a href="/contacto-privado.html"><i class="fas fa-motorcycle"></i> Contacto</a></li>
         <li><a href="/gestion-usuarios.html"><i class="fas fa-users"></i> Gestión de Usuarios</a></li>
       </ul>
     </nav>
@@ -44,7 +44,7 @@
         const result = await response.json();
         if (result.success) {
           alert('Sesión cerrada.');
-          window.location.href = '/login.html';
+          window.location.href = 'portada-publica.html';
         } else {
           alert(result.message || 'Error al cerrar sesión.');
         }

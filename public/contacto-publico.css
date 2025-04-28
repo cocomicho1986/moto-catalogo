@@ -1,12 +1,78 @@
+/* Estilo global para el contenedor */
+#contactContainer {
+  margin: 20px auto; /* Márgenes arriba/abajo y centrado horizontal */
+  max-width: 800px; /* Ancho máximo para mantenerlo responsivo */
+  padding: 20px;
+  background-color: #f9f9f9; /* Fondo claro para resaltar el contenido */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
 /* Estilo para la tabla de contactos públicos */
 #contactTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  text-align: left;
 }
 
-#contactTable th, #contactTable td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid #ddd;
+/* Encabezados de la tabla */
+#contactTable th {
+  background-color: #e74c3c; /* Color de fondo llamativo */
+  color: white; /* Texto blanco */
+  padding: 12px;
+  font-weight: bold;
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+/* Celdas de la tabla */
+#contactTable td {
+  padding: 12px;
+  border: none; /* Eliminamos bordes innecesarios */
+  background-color: #ffffff; /* Fondo blanco */
+  color: #333; /* Texto oscuro */
+  transition: background-color 0.3s ease; /* Transición suave para el hover */
+}
+
+/* Efecto hover en las filas */
+#contactTable tr:hover td {
+  background-color: #f1f1f1; /* Cambio de color al pasar el mouse */
+}
+
+/* Separación visual entre las filas */
+#contactTable tr {
+  border-bottom: 1px solid #ddd; /* Línea sutil entre filas */
+}
+
+/* Margen izquierdo para la tabla */
+#contactTable {
+  margin-left: 20px; /* Margen izquierdo para separar la tabla */
+}
+
+/* Estilo para los enlaces */
+h2 a {
+  text-decoration: none;
+  color: #e74c3c; /* Color llamativo */
+  font-size: 1.2rem;
+  margin-left: 20px;
+  transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+/* Cambio de color al pasar el mouse sobre el enlace */
+h2 a:hover {
+  color: #c0392b; /* Color más oscuro al hacer hover */
+}
+
+/* Estilo para los títulos de las etiquetas */
+.etiquetas {
+  font-weight: bold;
+  color: #555; /* Color gris oscuro */
+}
+
+/* Estilo para los contenidos */
+.contenido {
+  color: #333; /* Color negro */
 }
