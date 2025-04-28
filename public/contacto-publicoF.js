@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', async () => {
+// Función para cargar los contactos desde la API
+async function loadContacts() {
   try {
     const response = await fetch('/api/contacto-publico/contactos');
     if (!response.ok) {
@@ -9,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById('contactContainer');
     container.innerHTML = ''; // Limpiar el contenedor
 
+    // Mostrar cada contacto en una tabla
     contactos.forEach((contacto) => {
       const table = document.createElement('table');
       table.classList.add('item-table');
@@ -34,4 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('[FRONTEND] Error al cargar contactos:', error.message);
     alert('Ocurrió un error al cargar los contactos.');
   }
-});
+}
+
+// Cargar los contactos al iniciar la página
+loadContacts();
