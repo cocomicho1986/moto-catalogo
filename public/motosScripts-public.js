@@ -37,47 +37,51 @@ function populateSelect(selectId, options) {
   });
 }
 
-// Mostrar los ítems en la lista
 function displayItems(items) {
   const container = document.getElementById('items-list');
   if (items.length === 0) {
     container.innerHTML = '<p>No hay ítems disponibles.</p>';
     return;
   }
+
   const list = items.map(item => `
-    <div>
-     <table class="item-table" style="margin-bottom: 20px; width: 100%; border-collapse: collapse;">
-  <tr>
-    <!-- Columna de la imagen -->
-    <td rowspan="5" style="width: 30%; text-align: center; vertical-align: middle;">
-      <img src="${item.imagen}" alt="${item.marca}" style="max-width: 150px; display: block; margin: auto;">
-    </td>
-    <!-- Columna de etiquetas -->
-    <td style="width: 25%;" class="etiquetas">Marca:</td>
-    <!-- Columna de contenido -->
-    <td style="width: 45%;" class="contenido">${item.marca}</td>
-  </tr>
-  <tr>
-    <td class="etiquetas">Modelo:</td>
-    <td class="contenido">${item.modelo}</td>
-  </tr>
-  <tr>
-    <td class="etiquetas">Motor:</td>
-    <td class="contenido">${item.motor}</td>
-  </tr>
-  <tr>
-    <td class="etiquetas">Tipo:</td>
-    <td class="contenido">${item.tipo}</td>
-  </tr>
-  <tr>
-    <td class="etiquetas">Precio:</td>
-    <td class="contenido">${item.precio}</td>
-  </tr>
-</table>
-      
+    <div class="item-container">
+      <!-- Imagen visible -->
+      <img src="${item.imagen}" alt="${item.marca}" class="moto-image">
+
+      <!-- Contenedor para el botón y los detalles -->
+      <div class="details-container">
+        <!-- Botón para desplegar detalles -->
+        <button class="toggle-button">Mostrar Detalles</button>
+
+        <!-- Detalles ocultos inicialmente -->
+        <div class="item-details" style="display: none;">
+          <p><strong>Marca:</strong> ${item.marca}</p>
+          <p><strong>Modelo:</strong> ${item.modelo}</p>
+          <p><strong>Motor:</strong> ${item.motor}</p>
+          <p><strong>Tipo:</strong> ${item.tipo}</p>
+          <p><strong>Precio:</strong> ${item.precio}</p>
+        </div>
+      </div>
     </div>
   `).join('');
+
   container.innerHTML = list;
+
+  // Agregar funcionalidad a los botones "Mostrar Detalles"
+  const toggleButtons = document.querySelectorAll('.toggle-button');
+  toggleButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const detailsDiv = button.nextElementSibling; // Obtener el contenedor de detalles
+      if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
+        detailsDiv.style.display = 'flex'; // Mostrar los detalles en línea
+        button.textContent = 'Ocultar Detalles'; // Cambiar el texto del botón
+      } else {
+        detailsDiv.style.display = 'none'; // Ocultar los detalles
+        button.textContent = 'Mostrar Detalles'; // Restaurar el texto del botón
+      }
+    });
+  });
 }
 
 // Aplicar filtros
@@ -102,14 +106,6 @@ function applyFilters() {
     })
     .catch(error => console.error('Error al aplicar filtros:', error));
 }
-
-
-
-
-
-
-
-
 
 // Cargar los ítems al iniciar la página
 loadItems();
