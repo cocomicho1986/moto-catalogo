@@ -16,129 +16,22 @@ async function loadPortada() {
 }
 
 function displayPortada(portada) {
-  const container = document.getElementById('portada-container');
-  if (!portada) {
-    container.innerHTML = '<p>No hay portada disponible.</p>';
-    return;
-  }
+  // Rellenar título y subtítulo
+  const titulo = document.querySelector('.fondo-titulo');
+  const subtitulo = document.querySelector('.fondo-subtitulo');
+  titulo.textContent = portada.titulo || 'Bienvenido a MotoApp';
+  subtitulo.textContent = portada.subtitulo || 'Explora las mejores motos del mercado.';
 
-  // Crear el HTML para el fondo y el banner
-  const html = `
-    <!-- Fondo -->
-    <div class="fondo" style="background-image: url('${portada.fondo || ''}');">
-      <div class="fondo-overlay"></div>
-      <div class="fondo-content">
-        <h1 class="fondo-titulo">${portada.titulo}</h1>
-        <p class="fondo-subtitulo">${portada.subtitulo}</p>
-        <!-- Botones -->
-        <div class="fondo-buttons">
-          <a href="contacto-publico.html" class="btn btn-primary">Contacto</a>
-          <a href="/motos-public.html" class="btn btn-primary">Ver Motos</a>
-          <a href="/videos-public.html" class="btn btn-secondary">Ver Videos</a>
-        </div>
-      </div>
-    </div>
+  // Rellenar imagen izquierda (fondo)
+  const imagenIzquierda = document.querySelector('.imagen-izquierda img');
+  imagenIzquierda.src = portada.fondo || '';
+  imagenIzquierda.alt = 'Fondo';
 
-    <!-- Banner -->
-    <div class="banner" style="background-image: url('${portada.banner || ''}');">
-      <div class="banner-overlay"></div>
-      <div class="banner-content">
-        <h2>${portada.banner_titulo || ''}</h2>
-        <p>${portada.banner_subtitulo || ''}</p>
-      </div>
-    </div>
-
-    <!-- Pie de página -->
-    <footer class="footer">
-      <div class="footer-left">
-       
-      </div>
-      <div class="footer-right">
-        <!-- Espacio reservado para futuras expansiones si es necesario -->
-      </div>
-    </footer>
-  `;
-  container.innerHTML = html;
+  // Rellenar imagen derecha (banner)
+  const imagenDerecha = document.querySelector('.imagen-derecha img');
+  imagenDerecha.src = portada.banner || '';
+  imagenDerecha.alt = 'Banner';
 }
-
-// Función para simular el inicio de sesión
-function simulateLogin() {
-  const loginButton = document.querySelector('.footer-left .btn-outline[href="/iniciar-sesion.html"]');
-  const dashboardButton = document.querySelector('.footer-right .btn-outline[href="/dashboard.html"]');
-
-  // Simulación de autenticación (reemplazar con lógica real)
-  const isAuthenticated = false; // Cambiar a true si el usuario está autenticado
-
-  if (isAuthenticated) {
-    loginButton.style.display = 'none';
-    dashboardButton.style.display = 'inline-block';
-  } else {
-    loginButton.style.display = 'inline-block';
-    dashboardButton.style.display = 'none';
-  }
-}
-
-// Convertir imagen a Base64 automáticamente
-function handleImagePreview(input, previewElement, hiddenInput) {
-  const file = input.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = function (event) {
-    const base64String = event.target.result;
-    console.log("Imagen convertida a Base64:", base64String); // Depuración
-    hiddenInput.value = base64String; // Asignar el Base64 al campo oculto
-    previewElement.innerHTML = `<img src="${base64String}" alt="Preview" style="max-width: 200px;">`;
-  };
-
-  reader.onerror = function () {
-    alert('Error al cargar la imagen.');
-  };
-
-  reader.readAsDataURL(file); // Leer el archivo como Base64
-}
-
-//copiado de script.js
-
-// Función para manejar el envío del formulario de login
-document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-  const data = Object.fromEntries(formData.entries());
-
-  // Validar que los campos no estén vacíos
-  if (!data.nombre || !data.clave) {
-    alert('Por favor, completa todos los campos.');
-    return;
-  }
-
-  try {
-    console.log('[FRONTEND] Enviando solicitud de inicio de sesión...');
-    const response = await fetch('/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      console.error('[FRONTEND] Error en la respuesta del servidor:', response.status, response.statusText);
-      throw new Error('Error al iniciar sesión.');
-    }
-
-    const result = await response.json();
-    console.log('[FRONTEND] Respuesta del servidor:', result);
-
-    if (result.success) {
-      alert('Login exitoso.');
-      window.location.href = '/'; // Redirigir a la página principal
-    } else {
-      alert(result.message || 'Error al iniciar sesión.');
-    }
-  } catch (error) {
-    console.error('[FRONTEND] Error al iniciar sesión:', error);
-    alert('Ocurrió un error al iniciar sesión.');
-  }
-});
 
 // Función para verificar el estado de la sesión
 async function checkSessionStatus() {
@@ -175,18 +68,9 @@ async function checkSessionStatus() {
   }
 }
 
-// Función para redirigir al dashboard
-function goToDashboard() {
-  console.log('[FRONTEND] Redirigiendo al dashboard...');
-  window.location.href = '/dashboard.html'; // Cambia esto por la URL correcta de tu dashboard
-}
-
 // Verificar el estado de la sesión al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
   console.log('[FRONTEND] Página cargada. Verificando sesión...');
   checkSessionStatus();
+  loadPortada(); // Cargar la portada al iniciar la página
 });
-
-
-// Cargar la portada al iniciar la página
-loadPortada();

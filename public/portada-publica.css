@@ -5,60 +5,86 @@ body {
   color: #333;
 }
 
-/* Contenedor principal */
-#portada-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Encabezado */
+.header {
+  width: 100%;
+  background-color: #f4f4f4;
+  padding: 10px;
+  text-align: right;
+}
+
+.dashboard-button-container {
+  margin-right: 20px;
+}
+
+/* Título y subtítulo */
+.titulo-container {
   text-align: center;
-}
-
-/* Fondo */
-.fondo {
-  position: relative;
-  width: 100%;
-  height: 50vh; /* Altura ajustable */
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  overflow: hidden;
-}
-
-.fondo-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Filtro oscuro */
-}
-
-.fondo-content {
-  position: relative;
-  z-index: 1;
+  margin-top: 20px;
 }
 
 .fondo-titulo {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  color: #333;
 }
 
 .fondo-subtitulo {
   font-size: 1.5rem;
-  margin: 10px 0 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  margin: 10px 0;
+  color: #666;
 }
 
-.fondo-buttons {
+/* Contenido principal */
+.contenido-principal {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  gap: 20px;
 }
 
-.fondo-buttons .btn {
+/* Imágenes */
+.imagen-izquierda,
+.imagen-derecha {
+  flex: 1;
+  max-width: 45%; /* Ancho máximo para las imágenes */
+}
+
+.imagen-normal {
+  width: 100%;
+  height: auto;
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto suave al pasar el mouse */
+}
+
+.imagen-normal:hover {
+  transform: scale(1.05); /* Amplía la imagen ligeramente al pasar el mouse */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el mouse */
+}
+
+/* Botones */
+.botones-container {
+  display: flex;
+  flex-direction: column; /* Alineación vertical por defecto */
+  gap: 10px;
+  flex: 1;
+  max-width: 300px; /* Ancho máximo para los botones */
+  margin: 0 auto; /* Centrado horizontal */
+}
+
+@media (min-width: 768px) {
+  .botones-container {
+    flex-direction: row; /* Alineación horizontal en pantallas grandes */
+    justify-content: center;
+  }
+}
+
+.btn {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -69,87 +95,36 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.fondo-buttons .btn-primary {
+.btn-primary {
   background: #6a11cb;
 }
 
-.fondo-buttons .btn-secondary {
+.btn-secondary {
   background: #4a00e0;
 }
 
-.fondo-buttons .btn-outline {
-  background: transparent;
-  border: 2px solid white;
-}
-
-.fondo-buttons .btn:hover {
+.btn:hover {
   transform: scale(1.05);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Banner */
-.banner {
-  position: relative; /* Necesario para posicionar la superposición */
-  width: 100%; /* Ancho completo */
-  height: 30vh; /* Altura ajustable */
-  background-size: cover; /* Ajusta la imagen al contenedor */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita repetición */
-  overflow: hidden; /* Asegura que el contenido no se desborde */
-}
-
-/* Superposición semitransparente para el banner */
-.banner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
+/* Pie de página */
+.footer {
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  z-index: 1; /* Asegura que la superposición esté encima del fondo */
-}
-
-.banner-content {
-  position: relative;
-  z-index: 2; /* Coloca el contenido encima de la superposición */
+  background-color: #f4f4f4;
+  padding: 10px;
   text-align: center;
-  color: white;
-  padding: 20px;
+  margin-top: auto;
 }
 
-.banner-content h2 {
-  font-size: 2rem;
-  margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+.login-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease; /* Efecto suave al pasar el mouse */
 }
 
-.banner-content p {
-  font-size: 1.2rem;
-  margin: 10px 0 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-/* Diseño responsivo */
-@media (max-width: 768px) {
-  .fondo-titulo {
-    font-size: 2rem;
-  }
-
-  .fondo-subtitulo {
-    font-size: 1.2rem;
-  }
-
-  .fondo-buttons {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .banner-content h2 {
-    font-size: 1.5rem;
-  }
-
-  .banner-content p {
-    font-size: 1rem;
-  }
+.login-link:hover {
+  color: #0056b3; /* Cambia el color del texto al pasar el mouse */
+  text-decoration: underline;
 }

@@ -7,17 +7,42 @@
   <link rel="stylesheet" href="portada-publica.css">
 </head>
 <body>
+  <!-- Encabezado -->
   <header class="header">
-    <h1 class="logo"></h1>
-    <!-- Contenedor vacío para el botón Dashboard -->
     <div id="dashboard-button-container" class="dashboard-button-container"></div>
   </header>
 
-  <!-- Contenedor para la portada -->
-  <div id="portada-container"></div>
+  <!-- Contenedor principal -->
+  <div id="portada-container">
+    <!-- Título y subtítulo -->
+    <div class="titulo-container">
+      <h1 class="fondo-titulo">Cargando...</h1>
+      <p class="fondo-subtitulo">Cargando...</p>
+    </div>
 
+    <!-- Contenido principal -->
+    <div class="contenido-principal">
+      <!-- Imagen izquierda (Fondo) -->
+      <div class="imagen-izquierda">
+        <img src="" alt="Fondo" class="imagen-normal">
+      </div>
+
+      <!-- Botones -->
+      <div class="botones-container">
+        <a href="contacto-publico.html" class="btn btn-primary">Contacto</a>
+        <a href="/motos-public.html" class="btn btn-primary">Ver Motos</a>
+        <a href="/videos-public.html" class="btn btn-secondary">Ver Videos</a>
+      </div>
+
+      <!-- Imagen derecha (Banner) -->
+      <div class="imagen-derecha">
+        <img src="" alt="Banner" class="imagen-normal">
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
   <footer class="footer">
-    <p>&copy; 2023 MotoApp. Todos los derechos reservados.</p>
     <a href="/login.html" class="login-link">Iniciar Sesión</a>
   </footer>
 
