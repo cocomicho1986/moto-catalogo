@@ -18,22 +18,30 @@
       <!-- Filtros Select -->
       <div class="filters">
         <h3>Filtros</h3>
-        <label for="filterMarca">Marca:</label>
-        <select id="filterMarca" name="filterMarca">
-          <option value="">Todas</option>
-        </select>
-        <label for="filterModelo">Modelo:</label>
-        <select id="filterModelo" name="filterModelo">
-          <option value="">Todos</option>
-        </select>
-        <label for="filterTipo">Tipo:</label>
-        <select id="filterTipo" name="filterTipo">
-          <option value="">Todos</option>
-        </select>
-        <label for="filterPrecio">Precio:</label>
-        <select id="filterPrecio" name="filterPrecio">
-          <option value="">Todos</option>
-        </select>
+        <div class="filter-group">
+          <label for="filterMarca">Marca:</label>
+          <select id="filterMarca" name="filterMarca">
+            <option value="">Todas</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterModelo">Modelo:</label>
+          <select id="filterModelo" name="filterModelo">
+            <option value="">Todos</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterTipo">Tipo:</label>
+          <select id="filterTipo" name="filterTipo">
+            <option value="">Todos</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterPrecio">Precio:</label>
+          <select id="filterPrecio" name="filterPrecio">
+            <option value="">Todos</option>
+          </select>
+        </div>
         <button onclick="applyFilters()">Aplicar Filtros</button>
       </div>
 

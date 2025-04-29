@@ -47,16 +47,33 @@ main {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para los selectores de filtro */
-.filters select {
+/* Contenedor para cada filtro */
+.filter-group {
+  display: flex;
+  flex-direction: column; /* Apilar etiqueta y selector verticalmente */
+  align-items: flex-start; /* Alinear elementos al inicio */
+  gap: 5px; /* Espacio entre la etiqueta y el selector */
+  min-width: 150px; /* Ancho mínimo para evitar que los filtros se vean demasiado comprimidos */
+}
+
+/* Etiquetas de los filtros */
+.filter-group label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Selectores de filtro */
+.filter-group select {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
+  width: 100%; /* Ocupar todo el ancho del contenedor */
   max-width: 200px; /* Ancho máximo para los selectores */
 }
 
-/* Estilo para el botón de aplicar filtros */
+/* Botón de aplicar filtros */
 .filters button {
   padding: 8px 12px;
   background-color: #007bff;
@@ -65,10 +82,32 @@ main {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  align-self: flex-end; /* Alinear el botón al final */
 }
 
 .filters button:hover {
   background-color: #0056b3;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column; /* Apilar los filtros verticalmente en pantallas pequeñas */
+    align-items: flex-start; /* Alinear filtros al inicio */
+  }
+
+  .filter-group {
+    flex-direction: row; /* Alinear etiqueta y selector horizontalmente */
+    gap: 10px; /* Espacio entre la etiqueta y el selector */
+  }
+
+  .filter-group label {
+    font-size: 0.8rem; /* Reducir el tamaño de fuente en móviles */
+  }
+
+  .filter-group select {
+    max-width: 150px; /* Reducir el ancho máximo en móviles */
+  }
 }
 
 /* Estilo para el dashboard */
