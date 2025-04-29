@@ -47,19 +47,21 @@ body {
   gap: 20px;
 }
 
-/* Imágenes */
+/* Estilos para las imágenes */
 .imagen-izquierda,
 .imagen-derecha {
   flex: 1;
-  max-width: 45%; /* Ancho máximo para las imágenes */
+  max-width: 300px; /* Ancho máximo uniforme */
+  height: 200px; /* Altura fija uniforme */
+  overflow: hidden; /* Oculta cualquier parte de la imagen que exceda el contenedor */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
 }
 
 .imagen-normal {
-  width: 100%;
-  height: auto;
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto suave al pasar el mouse */
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+  height: 100%; /* Asegura que la imagen ocupe todo el alto del contenedor */
+  object-fit: cover; /* Ajusta la imagen sin distorsionarla */
 }
 
 .imagen-normal:hover {
@@ -68,44 +70,55 @@ body {
 }
 
 /* Botones */
+/* Estilos generales para los botones */
 .botones-container {
   display: flex;
   flex-direction: column; /* Alineación vertical por defecto */
-  gap: 10px;
-  flex: 1;
-  max-width: 300px; /* Ancho máximo para los botones */
-  margin: 0 auto; /* Centrado horizontal */
+  align-items: center; /* Centra los botones horizontalmente */
+  gap: 15px; /* Espacio entre los botones */
+  margin: 20px 0; /* Margen superior e inferior */
 }
 
 @media (min-width: 768px) {
   .botones-container {
     flex-direction: row; /* Alineación horizontal en pantallas grandes */
-    justify-content: center;
   }
 }
 
 .btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-primary {
-  background: #6a11cb;
-}
-
-.btn-secondary {
-  background: #4a00e0;
+  background-color: #6a11cb; /* Color principal */
+  color: white; /* Texto blanco */
+  border: none; /* Sin bordes */
+  padding: 12px 24px; /* Espaciado interno */
+  font-size: 1rem; /* Tamaño de fuente uniforme */
+  font-weight: bold; /* Texto en negrita */
+  border-radius: 8px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  text-decoration: none; /* Elimina subrayado en enlaces */
+  text-align: center; /* Alinea el texto al centro */
+  transition: all 0.3s ease; /* Animación suave */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  min-width: 150px; /* Ancho mínimo para evitar botones demasiado pequeños */
 }
 
 .btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: #4a00e0; /* Cambio de color al pasar el mouse */
+  transform: translateY(-2px); /* Efecto de elevación */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+}
+
+.btn:active {
+  transform: scale(0.98); /* Reduce ligeramente el tamaño al hacer clic */
+  box-shadow: none; /* Elimina la sombra al hacer clic */
+}
+
+/* Botón secundario (ejemplo para "Ver Videos") */
+.btn-secondary {
+  background-color: #ff5722; /* Color naranja para diferenciarlo */
+}
+
+.btn-secondary:hover {
+  background-color: #e64a19; /* Cambio de color al pasar el mouse */
 }
 
 /* Pie de página */
