@@ -1,120 +1,104 @@
-/* Resetear márgenes y paddings */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* Estilos generales */
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  overflow-x: hidden; /* Evitar barras de desplazamiento horizontal */
+  color: #333;
 }
 
-.header {
+/* Contenedor principal */
+#portada-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 20px;
-  background-color: transparent; /* Fondo transparente para el header */
-  position: absolute; /* Posicionar el header encima del fondo */
+  text-align: center;
+}
+
+/* Fondo */
+.fondo {
+  position: relative;
+  width: 100%;
+  height: 50vh; /* Altura ajustable */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+}
+
+.fondo-overlay {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10; /* Asegurar que el header esté encima del fondo */
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Filtro oscuro */
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: white; /* Color del texto del logo */
-}
-
-.dashboard-button-container {
-  display: flex;
-}
-
-.btn-dashboard {
-  padding: 10px 20px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  text-decoration: none;
-  color: #fff;
-  background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradiente naranja */
-  transition: all 0.3s ease; /* Animación suave */
-}
-
-.btn-dashboard:hover {
-  transform: scale(1.1); /* Aumentar el tamaño al pasar el mouse */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
-}
-
-/* Fondo dinámico */
-.fondo {
+.fondo-content {
   position: relative;
-  width: 100%; /* Ancho completo */
-  height: 75vh; /* Altura predeterminada */
-  min-height: 400px; /* Altura mínima para pantallas pequeñas */
-  max-height: 100vh; /* Altura máxima para pantallas grandes */
-  background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  image-rendering: high-quality; /* Mejora la calidad de la imagen */
+  z-index: 1;
 }
 
-/* Media Query para dispositivos móviles */
-@media (max-width: 768px) {
-  .fondo {
-    height: 50vh; /* Altura reducida para dispositivos móviles */
-  }
+.fondo-titulo {
+  font-size: 3rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Contenedor para los botones en el fondo */
+.fondo-subtitulo {
+  font-size: 1.5rem;
+  margin: 10px 0 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
 .fondo-buttons {
-  position: absolute;
-  bottom: 20px; /* Distancia desde la parte inferior */
-  left: 50%; /* Centrado horizontal */
-  transform: translateX(-50%); /* Ajuste para centrar correctamente */
   display: flex;
-  gap: 15px; /* Espacio entre botones */
-  z-index: 5; /* Asegurarse de que los botones estén encima del fondo */
+  gap: 10px;
 }
 
-/* Estilo de los botones en el fondo */
 .fondo-buttons .btn {
   padding: 10px 20px;
-  font-size: 0.9rem;
-  font-weight: bold;
   border: none;
-  border-radius: 30px;
+  border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
-  color: black;
-  font-weight: bolder;
-  background-color: #ffffff; /* Fondo blanco para los botones */
-  transition: all 0.3s ease; /* Animación suave */
+  color: white;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover para los botones */
+.fondo-buttons .btn-primary {
+  background: #6a11cb;
+}
+
+.fondo-buttons .btn-secondary {
+  background: #4a00e0;
+}
+
+.fondo-buttons .btn-outline {
+  background: transparent;
+  border: 2px solid white;
+}
+
 .fondo-buttons .btn:hover {
-  transform: scale(1.1); /* Aumentar el tamaño al pasar el mouse */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Banner dinámico */
+/* Banner */
 .banner {
-  position: relative;
-  width: 100%; /* Ancho completo por defecto */
-  height: 150px; /* Altura predeterminada del banner */
-  background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor */
+  position: relative; /* Necesario para posicionar la superposición */
+  width: 100%; /* Ancho completo */
+  height: 30vh; /* Altura ajustable */
+  background-size: cover; /* Ajusta la imagen al contenedor */
   background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  margin-top: -50px; /* Superposición ligera con el fondo */
+  background-repeat: no-repeat; /* Evita repetición */
+  overflow: hidden; /* Asegura que el contenido no se desborde */
 }
 
-/* Overlay semi-transparente para mejorar la legibilidad */
+/* Superposición semitransparente para el banner */
 .banner::before {
   content: '';
   position: absolute;
@@ -122,19 +106,50 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.1; /* Transparencia SOLO para la imagen */
-  z-index: 1; /* Colocar detrás del contenido */
+  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  z-index: 1; /* Asegura que la superposición esté encima del fondo */
 }
 
 .banner-content {
   position: relative;
-  z-index: 2;
-  text-align: left;
-  color: blue;
-  padding-top: 50px; /* Espaciado desde la parte superior */
-  margin: 5px;
-  font-weight: bold;
+  z-index: 2; /* Coloca el contenido encima de la superposición */
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+.banner-content h2 {
+  font-size: 2rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.banner-content p {
+  font-size: 1.2rem;
+  margin: 10px 0 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+  .fondo-titulo {
+    font-size: 2rem;
+  }
+
+  .fondo-subtitulo {
+    font-size: 1.2rem;
+  }
+
+  .fondo-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .banner-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .banner-content p {
+    font-size: 1rem;
+  }
 }
