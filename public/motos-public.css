@@ -1,120 +1,176 @@
 /* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(blue, orange);
-  }
-  
-  header {
-    width: 100%;
-    background-color: #f4f4f4;
-    padding: 10px;
-    text-align: center;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(blue, orange);
+}
+
+header {
+  width: 100%;
+  background-color: #f4f4f4;
+  padding: 10px;
+  text-align: center;
+}
+
+main {
+  display: flex; /* Contenedor principal con Flexbox */
+  flex-direction: column; /* Apilar los elementos verticalmente */
+  align-items: flex-start; /* Alinear todo a la izquierda */
+  width: 90%; /* Reducir el ancho general */
+  max-width: 1200px; /* Máximo ancho del contenedor (más angosto) */
+  margin: 20px auto; /* Centrado horizontal */
+  gap: 20px; /* Espacio entre los elementos */
+}
+
+/* Contenedor principal */
+#main-container {
+  display: flex;
+  flex-direction: column; /* Apilar los elementos verticalmente */
+  align-items: flex-start; /* Alinear todo a la izquierda */
+  gap: 20px; /* Espacio entre los filtros y el dashboard */
+  width: 100%; /* Ocupar todo el ancho disponible */
+}
+
+/* Estilo para los filtros */
+.filters {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los filtros se ajusten en varias líneas si es necesario */
+  gap: 10px; /* Espacio entre los filtros */
+  width: 100%; /* Ocupar todo el ancho disponible */
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los selectores de filtro */
+.filters select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  max-width: 200px; /* Ancho máximo para los selectores */
+}
+
+/* Estilo para el botón de aplicar filtros */
+.filters button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filters button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para el dashboard */
+#items-list {
+  width: 100%; /* Ocupar todo el ancho disponible */
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 500px; /* Altura máxima reducida */
+  overflow-y: auto; /* Barra de desplazamiento vertical si es necesario */
+}
+
+/* Estilo para cada ítem */
+.item-container {
+  display: flex; /* Alinea los elementos horizontalmente */
+  align-items: center; /* Alinea verticalmente los elementos */
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Estilo para las imágenes */
+.moto-image {
+  width: 120px; /* Ancho reducido */
+  height: 120px; /* Altura reducida */
+  object-fit: cover; /* Recorta la imagen para mantener la proporción */
+  margin-right: 10px; /* Espacio entre la imagen y los detalles */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: transform 0.3s ease; /* Efecto suave al pasar el mouse */
+}
+
+/* Efecto de zoom */
+.moto-image:hover {
+  transform: scale(1.2); /* Aumenta el tamaño en un 20% */
+}
+
+/* Contenedor para el botón y los detalles */
+.details-container {
+  display: flex; /* Alinea el botón y los detalles horizontalmente */
+  flex-direction: column; /* Orientación vertical dentro del contenedor */
+  align-items: flex-start; /* Alinea los elementos al inicio */
+}
+
+/* Estilo del botón */
+.toggle-button {
+  margin-top: 0;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para los detalles ocultos */
+.item-details {
+  display: none; /* Ocultar detalles por defecto */
+  margin-left: 10px; /* Espacio entre el botón y los detalles */
+  text-align: left;
+}
+
+.item-details p {
+  margin: 8px 0; /* Espacio vertical entre cada campo */
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 1.5; /* Espaciado entre líneas para mejorar la legibilidad */
+}
+
+.item-details strong {
+  margin-right: 5px; /* Espacio entre la etiqueta (ej. "Marca:") y el contenido */
+}
+
+.etiquetas {
+  font-weight: bold;
+  color: #333;
+}
+
+.contenido {
+  color: #007bff;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
   main {
-    display: flex; /* Contenedor principal con Flexbox */
-    width: 95%; /* Ocupa el 95% del ancho de la pantalla */
-    max-width: 1400px; /* Máximo ancho del contenedor */
-    margin: 20px auto; /* Centrado horizontal */
-    gap: 20px; /* Espacio entre los elementos */
+    width: 95%; /* Aumentar el ancho en pantallas pequeñas */
   }
-  
-  /* Estilo para el dashboard */
-  #items-list {
-    flex: 2; /* La lista ocupa 2 partes del espacio */
-    max-width: 600px; /* Reducimos el ancho máximo de la lista */
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-height: 600px; /* Altura máxima de la lista */
-    overflow-y: auto; /* Barra de desplazamiento vertical */
-  }
-  
-  /* Estilo para cada ítem */
+
   .item-container {
-    display: flex; /* Alinea los elementos horizontalmente */
-    align-items: center; /* Alinea verticalmente los elementos */
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    flex-direction: column; /* Apila los elementos verticalmente en pantallas pequeñas */
+    align-items: center; /* Centra los elementos */
   }
-  
-  /* Estilo para las imágenes */
-  .moto-image {
-    width: 150px; /* Ancho fijo */
-    height: 150px; /* Altura fija */
-    object-fit: cover; /* Recorta la imagen para mantener la proporción */
-    margin-right: 10px; /* Espacio entre la imagen y los detalles */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: transform 0.3s ease; /* Efecto suave al pasar el mouse */
-  }
-  
-  /* Efecto de zoom */
-  .moto-image:hover {
-    transform: scale(1.2); /* Aumenta el tamaño en un 20% */
-  }
-  
-  /* Contenedor para el botón y los detalles */
+
   .details-container {
-    display: flex; /* Alinea el botón y los detalles horizontalmente */
-    flex-direction: column; /* Orientación vertical dentro del contenedor */
-    align-items: flex-start; /* Alinea los elementos al inicio */
+    flex-direction: column; /* Apila el botón y los detalles verticalmente */
   }
-  
-  /* Estilo del botón */
-  .toggle-button {
-    margin-top: 0;
-    padding: 8px 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .toggle-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Estilo para los detalles ocultos */
-  .item-details {
-    display: none; /* Ocultar detalles por defecto */
-    margin-left: 10px; /* Espacio entre el botón y los detalles */
-    text-align: left;
-  }
-  
-  .item-details p {
-    margin: 5px 0;
-    font-family: 'Courier New', Courier, monospace;
-  }
-  
-  .etiquetas {
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .contenido {
-    color: #007bff;
-  }
-  
-  /* Responsividad */
-  @media (max-width: 768px) {
-    .item-container {
-      flex-direction: column; /* Apila los elementos verticalmente en pantallas pequeñas */
-      align-items: center; /* Centra los elementos */
-    }
-  
-    .details-container {
-      flex-direction: column; /* Apila el botón y los detalles verticalmente */
-    }
-  }
+}

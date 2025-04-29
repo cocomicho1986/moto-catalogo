@@ -7,16 +7,14 @@
   <link rel="stylesheet" href="motos-public.css"> <!-- Vinculamos el archivo CSS -->
 </head>
 <body>
-  <h2 ><a href="/portada-publica.html">Regresar</a></h2>
+  <h2><a href="/portada-publica.html">Regresar</a></h2>
   <header>
-   
     <h1>Administrar Items</h1>
   </header>
 
   <main>
     <!-- Contenedor Principal -->
-    <div class="container">
-    
+    <div id="main-container">
       <!-- Filtros Select -->
       <div class="filters">
         <h3>Filtros</h3>
@@ -38,10 +36,10 @@
         </select>
         <button onclick="applyFilters()">Aplicar Filtros</button>
       </div>
-    </div>
 
-    <!-- Lista de Ítems -->
-    <div id="items-list"></div>
+      <!-- Lista de Ítems -->
+      <div id="items-list"></div>
+    </div>
   </main>
 
   <footer>
