@@ -51,7 +51,7 @@ function displayItems(items) {
 
       <!-- Contenedor para el botón y los detalles -->
       <div class="details-container">
-        <!-- Botón para desplegar detalles -->
+        <!-- Botón para desplegar detalles (ahora a la izquierda) -->
         <button class="toggle-button">Mostrar Detalles</button>
 
         <!-- Detalles ocultos inicialmente -->
@@ -74,7 +74,7 @@ function displayItems(items) {
     button.addEventListener('click', () => {
       const detailsDiv = button.nextElementSibling; // Obtener el contenedor de detalles
       if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
-        detailsDiv.style.display = 'flex'; // Mostrar los detalles en línea
+        detailsDiv.style.display = 'block'; // Mostrar los detalles (usando block en lugar de flex)
         button.textContent = 'Ocultar Detalles'; // Cambiar el texto del botón
       } else {
         detailsDiv.style.display = 'none'; // Ocultar los detalles

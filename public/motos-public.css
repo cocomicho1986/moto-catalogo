@@ -113,8 +113,9 @@ main {
 /* Contenedor para el botón y los detalles */
 .details-container {
   display: flex; /* Alinea el botón y los detalles horizontalmente */
-  flex-direction: column; /* Orientación vertical dentro del contenedor */
-  align-items: flex-start; /* Alinea los elementos al inicio */
+  flex-direction: column; /* Apila el botón y los detalles verticalmente */
+  align-items: flex-start; /* Alinear los elementos al inicio */
+  width: 100%; /* Ocupar todo el ancho disponible */
 }
 
 /* Estilo del botón */
@@ -127,6 +128,7 @@ main {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  order: -1; /* Mover el botón al principio (izquierda) */
 }
 
 .toggle-button:hover {
@@ -136,27 +138,20 @@ main {
 /* Estilo para los detalles ocultos */
 .item-details {
   display: none; /* Ocultar detalles por defecto */
-  margin-left: 10px; /* Espacio entre el botón y los detalles */
+  margin-left: 0; /* Eliminar margen adicional */
   text-align: left;
 }
 
 .item-details p {
-  margin: 8px 0; /* Espacio vertical entre cada campo */
+  margin: 8px 0; /* Espaciado vertical entre campos */
   font-family: 'Courier New', Courier, monospace;
-  line-height: 1.5; /* Espaciado entre líneas para mejorar la legibilidad */
+  line-height: 1.5; /* Mejorar la legibilidad */
+  white-space: pre-wrap; /* Mantener saltos de línea y espacios */
 }
 
 .item-details strong {
-  margin-right: 5px; /* Espacio entre la etiqueta (ej. "Marca:") y el contenido */
-}
-
-.etiquetas {
-  font-weight: bold;
-  color: #333;
-}
-
-.contenido {
-  color: #007bff;
+  margin-right: 10px; /* Espacio entre etiquetas y valores */
+  display: inline-block; /* Asegura que las etiquetas no se peguen al contenido */
 }
 
 /* Responsividad */
