@@ -27,7 +27,7 @@ h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-h2  {
+.header h2  {
   text-decoration: none;
   color: #e74c3c;
   font-size: 1.2rem;

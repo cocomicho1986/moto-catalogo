@@ -261,6 +261,17 @@ footer {
   display: block; /* Evitar espacios innecesarios */
   margin: 0 auto; /* Centra la imagen horizontalmente */
 }
+
+
+.header {
+  width: 100%;
+  background-color: #1e1e1e;
+  padding: 10px;
+  text-align: right;
+}
+.header h2{
+  text-align: left;
+}
 @media (max-width: 600px) {
   main {
     flex-direction: column; /* Apilar elementos verticalmente */
