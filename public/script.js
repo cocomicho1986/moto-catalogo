@@ -67,6 +67,7 @@ async function checkSessionStatus() {
     } else {
       console.log('[FRONTEND] No hay sesión activa. Ocultando botón...');
       container.innerHTML = '';
+      
     }
   } catch (error) {
     console.error('[FRONTEND] Error al verificar la sesión:', error);

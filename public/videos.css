@@ -12,6 +12,12 @@ body {
   line-height: 1.6;
   padding: 20px;
 }
+.header {
+  width: 100%;
+  background-color: #1e1e1e;
+  padding: 10px;
+  text-align: right;
+}
 
 h1 {
   text-align: center;
@@ -21,12 +27,13 @@ h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-h2 a {
+h2  {
   text-decoration: none;
   color: #e74c3c;
   font-size: 1.2rem;
   margin-left: 20px;
   transition: color 0.3s ease;
+  align-self: left;
 }
 
 h2 a:hover {
