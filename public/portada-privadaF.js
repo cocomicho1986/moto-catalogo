@@ -31,11 +31,8 @@ function displayPortada(portada) {
         <strong>Fondo:</strong>
         ${portada.fondo ? `<img src="${portada.fondo}" alt="Fondo" style="max-width: 300px;">` : '<p>No hay imagen de fondo cargada.</p>'}
       </div>
-      <div>
-        <strong>Banner:</strong>
-        ${portada.banner ? `<img src="${portada.banner}" alt="Banner" style="max-width: 300px;">` : '<p>No hay banner cargado.</p>'}
-      </div>
-      <button onclick="editPortada(${portada.id}, '${portada.titulo}', '${portada.subtitulo}', '${portada.fondo}', '${portada.banner}')">Editar</button>
+      
+      <button onclick="editPortada(${portada.id}, '${portada.titulo}', '${portada.subtitulo}', '${portada.fondo}')">Editar</button>
     </div>
   `;
   container.innerHTML = html;
@@ -66,21 +63,19 @@ document.getElementById('fondoFile').addEventListener('change', function () {
   handleImagePreview(this, document.getElementById('fondo-preview'), document.getElementById('fondo'));
 });
 
-document.getElementById('bannerFile').addEventListener('change', function () {
-  handleImagePreview(this, document.getElementById('banner-preview'), document.getElementById('banner'));
-});
+
 
 // Editar la portada existente
-function editPortada(id, titulo, subtitulo, fondo, banner) {
+function editPortada(id, titulo, subtitulo, fondo) {
   document.getElementById('id').value = id;
   document.getElementById('titulo').value = titulo;
   document.getElementById('subtitulo').value = subtitulo;
   document.getElementById('fondo').value = fondo; // Mantener la imagen de fondo existente
-  document.getElementById('banner').value = banner; // Mantener el banner existente
+ 
 
   // Mostrar vistas previas de las imágenes actuales
   document.getElementById('fondo-preview').innerHTML = fondo ? `<img src="${fondo}" alt="Fondo" style="max-width: 200px;">` : '';
-  document.getElementById('banner-preview').innerHTML = banner ? `<img src="${banner}" alt="Banner" style="max-width: 200px;">` : '';
+  
 
   document.getElementById('cancelButton').style.display = 'inline';
 }
@@ -91,11 +86,11 @@ function resetForm() {
   document.getElementById('titulo').value = '';
   document.getElementById('subtitulo').value = '';
   document.getElementById('fondoFile').value = '';
-  document.getElementById('bannerFile').value = '';
+  
   document.getElementById('fondo').value = '';
-  document.getElementById('banner').value = '';
+ 
   document.getElementById('fondo-preview').innerHTML = '';
-  document.getElementById('banner-preview').innerHTML = '';
+  
   document.getElementById('cancelButton').style.display = 'none';
 }
 
@@ -111,10 +106,7 @@ document.getElementById('portadaForm').addEventListener('submit', async (e) => {
     return;
   }
 
-  if (data.banner && !data.banner.startsWith('data:image/')) {
-    alert('La imagen de banner debe ser un Base64 válido.');
-    return;
-  }
+  
 
   try {
     let method, url;

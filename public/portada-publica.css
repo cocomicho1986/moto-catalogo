@@ -1,14 +1,20 @@
 /* Estilos generales */
-body {
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  color: #333;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Encabezado */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background-color: #121212;
+  line-height: 1.6;
+}
+
 .header {
   width: 100%;
-  background-color: #f4f4f4;
+  background-color: #1e1e1e;
   padding: 10px;
   text-align: right;
 }
@@ -17,127 +23,117 @@ body {
   margin-right: 20px;
 }
 
-/* Título y subtítulo */
-.titulo-container {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.fondo-titulo {
-  font-size: 2.5rem;
-  margin: 0;
-  color: #333;
-}
-
-.fondo-subtitulo {
-  font-size: 1.5rem;
-  margin: 10px 0;
-  color: #666;
-}
-
-/* Contenido principal */
-.contenido-principal {
+.portada-container {
   display: flex;
-  flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
-  max-width: 1200px;
-  margin: 20px auto;
-  gap: 20px;
+  flex-direction: column; /* Apilado verticalmente */
+  align-items: flex-start; /* Alineación hacia la izquierda */
+  gap: 15px;
+  padding: 20px;
 }
 
-/* Estilos para las imágenes */
-.imagen-izquierda,
-.imagen-derecha {
-  flex: 1;
-  max-width: 300px; /* Ancho máximo uniforme */
-  height: 200px; /* Altura fija uniforme */
-  overflow: hidden; /* Oculta cualquier parte de la imagen que exceda el contenedor */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+.imagen-izquierda {
+  width: 150px; /* Tamaño fijo para la imagen */
+  height: 150px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .imagen-normal {
-  width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
-  height: 100%; /* Asegura que la imagen ocupe todo el alto del contenedor */
-  object-fit: cover; /* Ajusta la imagen sin distorsionarla */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.imagen-normal:hover {
-  transform: scale(1.05); /* Amplía la imagen ligeramente al pasar el mouse */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el mouse */
+.texto-contenido {
+  text-align: left;
 }
 
-/* Botones */
-/* Estilos generales para los botones */
+.fondo-titulo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.fondo-subtitulo {
+  font-size: 1rem;
+  margin: 5px 0;
+  color: #ccc;
+}
+
 .botones-container {
   display: flex;
-  flex-direction: column; /* Alineación vertical por defecto */
-  align-items: center; /* Centra los botones horizontalmente */
-  gap: 15px; /* Espacio entre los botones */
-  margin: 20px 0; /* Margen superior e inferior */
+  flex-direction: column;
+  align-items: flex-start; /* Alineación hacia la izquierda */
+  gap: 10px;
 }
 
 @media (min-width: 768px) {
+  .portada-container {
+    flex-direction: column; /* Mantenemos apilado en pantallas grandes */
+    align-items: flex-start; /* Alineación hacia la izquierda */
+  }
+
+  .imagen-izquierda {
+    width: 200px; /* Tamaño ligeramente mayor en pantallas grandes */
+    height: 200px;
+  }
+
   .botones-container {
-    flex-direction: row; /* Alineación horizontal en pantallas grandes */
+    flex-direction: row;
+    gap: 15px;
   }
 }
 
 .btn {
-  background-color: #6a11cb; /* Color principal */
-  color: white; /* Texto blanco */
-  border: none; /* Sin bordes */
-  padding: 12px 24px; /* Espaciado interno */
-  font-size: 1rem; /* Tamaño de fuente uniforme */
-  font-weight: bold; /* Texto en negrita */
-  border-radius: 8px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  text-decoration: none; /* Elimina subrayado en enlaces */
-  text-align: center; /* Alinea el texto al centro */
-  transition: all 0.3s ease; /* Animación suave */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-  min-width: 150px; /* Ancho mínimo para evitar botones demasiado pequeños */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
-.btn:hover {
-  background-color: #4a00e0; /* Cambio de color al pasar el mouse */
-  transform: translateY(-2px); /* Efecto de elevación */
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+.btn-primary {
+  background-color: #ff5722;
 }
 
-.btn:active {
-  transform: scale(0.98); /* Reduce ligeramente el tamaño al hacer clic */
-  box-shadow: none; /* Elimina la sombra al hacer clic */
+.btn-primary:hover {
+  background-color: #e64a19;
+  transform: scale(1.05);
 }
 
-/* Botón secundario (ejemplo para "Ver Videos") */
 .btn-secondary {
-  background-color: #ff5722; /* Color naranja para diferenciarlo */
+  background-color: #6a11cb;
 }
 
 .btn-secondary:hover {
-  background-color: #e64a19; /* Cambio de color al pasar el mouse */
+  background-color: #4a00e0;
+  transform: scale(1.05);
 }
 
-/* Pie de página */
 .footer {
-  width: 100%;
-  background-color: #f4f4f4;
+  background-color: #1e1e1e;
   padding: 10px;
   text-align: center;
-  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  width: 100%; /* El pie ocupa todo el ancho, pero el contenido es discreto */
+  max-width: 400px; /* Limitamos el ancho del contenido */
+  margin: 0 auto; /* Centramos el contenido */
 }
 
 .login-link {
   color: #007bff;
   text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease; /* Efecto suave al pasar el mouse */
+  font-size: 0.9rem; /* Tamaño más pequeño */
+  font-weight: normal; /* Quitamos el negrita */
+  transition: color 0.3s ease;
 }
 
 .login-link:hover {
-  color: #0056b3; /* Cambia el color del texto al pasar el mouse */
+  color: #0056b3;
   text-decoration: underline;
 }

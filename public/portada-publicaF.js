@@ -27,10 +27,7 @@ function displayPortada(portada) {
   imagenIzquierda.src = portada.fondo || '';
   imagenIzquierda.alt = 'Fondo';
 
-  // Rellenar imagen derecha (banner)
-  const imagenDerecha = document.querySelector('.imagen-derecha img');
-  imagenDerecha.src = portada.banner || '';
-  imagenDerecha.alt = 'Banner';
+ 
 }
 
 // Función para verificar el estado de la sesión
