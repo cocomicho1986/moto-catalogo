@@ -9,19 +9,56 @@ body {
   background:linear-gradient(blue,orange);
   
 }
-h2 a {
-  text-decoration: none;
-  color: #e74c3c;
-  font-size: 1.2rem;
-  margin-left: 20px;
-  transition: color 0.3s ease;
+.header {
+  display: flex; /* Usamos Flexbox para alinear elementos */
+  justify-content: space-between; /* Separamos "Regresar" (izquierda) y "Dashboard" (derecha) */
+  align-items: center; /* Alineamos verticalmente ambos elementos */
+  width: 100%; /* Ancho completo del encabezado */
+  background-color: #000; /* Fondo negro */
+  padding: 10px; /* Espaciado interno */
 }
 
-header {
-  width: 100%;
-  background-color: #f4f4f4;
-  padding: 10px;
-  text-align: center;
+.header h2 {
+  margin: 0; /* Quitamos márgenes por defecto del h2 */
+}
+
+.header h2 a {
+  text-decoration: none; /* Quitamos el subrayado del enlace */
+  color: #fff; /* Color blanco para el texto del enlace */
+  font-size: 1rem; /* Tamaño moderado */
+  font-weight: bold; /* Negrita para destacar */
+  transition: color 0.3s ease; /* Efecto hover suave */
+}
+
+.header h2 a:hover {
+  color: #ccc; /* Cambio de color al pasar el mouse */
+  text-decoration: underline; /* Subrayado al hacer hover */
+}
+
+.dashboard-button-container {
+  display: flex; /* Aseguramos que el botón esté alineado correctamente */
+  visibility: hidden; /* Ocultamos el contenedor si está vacío */
+}
+
+.dashboard-button-container a {
+  text-decoration: none; /* Quitamos el subrayado del enlace */
+  color: #fff; /* Color blanco para el texto del botón */
+  background-color: #ff5722; /* Color llamativo para el botón */
+  padding: 8px 16px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 0.9rem; /* Tamaño moderado */
+  font-weight: bold; /* Negrita para destacar */
+  transition: all 0.3s ease; /* Efecto hover suave */
+}
+
+.dashboard-button-container a:hover {
+  background-color: #e64a19; /* Cambio de color al pasar el mouse */
+  transform: scale(1.05); /* Efecto de escala al hacer hover */
+}
+
+/* Mostrar el contenedor solo si tiene contenido */
+.dashboard-button-container:not(:empty) {
+  visibility: visible;
 }
 
 main {

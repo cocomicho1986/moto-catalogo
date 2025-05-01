@@ -4,65 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestión de Portada</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f9f9f9;
-    }
-    form {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-    input[type="text"], input[type="file"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .preview img {
-      max-width: 100%;
-      height: auto;
-      margin-top: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-    .actions {
-      margin-top: 20px;
-      display: flex;
-      gap: 10px;
-    }
-    .actions button {
-      flex: 1;
-    }
-  </style>
+ 
+  <link rel="stylesheet" href="portada-privada.css">
 </head>
 <body>
-  <header>
-    <p><a href="portada-publica.html">Regresar</a></p>
-    <div id="dashboard-button-container" class="dashboard-button-container"></div>
+  <header class="header">
+    <h2><a href="/portada-publica.html">Regresar</a></h2>
+    <div id="dashboard-button-container" class="dashboard-button-container">
+      <!-- Este botón solo aparecerá si hay sesión iniciada -->
+      <a href="/dashboard.html" class="btn btn-dashboard">Dashboard</a>
+    </div>
   </header>
   <h1>Gestión de Portada</h1>
 
