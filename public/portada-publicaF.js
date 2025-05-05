@@ -71,3 +71,43 @@ document.addEventListener('DOMContentLoaded', () => {
   checkSessionStatus();
   loadPortada(); // Cargar la portada al iniciar la página
 });
+
+//Funcion ocultar boton
+
+// Variables para contar los clics
+let clickCount = 0;
+const imagenSecreta = document.getElementById('imagen-secreta');
+const botonSecreto = document.getElementById('boton-secreto');
+
+// Tiempo máximo entre clics (en milisegundos)
+const tiempoMaximo = 500;
+let ultimoClick = 0;
+
+imagenSecreta.addEventListener('click', () => {
+  const ahora = new Date().getTime();
+
+  // Si pasó más del tiempo permitido desde el último clic, reiniciamos
+  if (ahora - ultimoClick > tiempoMaximo) {
+    clickCount = 0;
+  }
+
+  clickCount++;
+  ultimoClick = ahora;
+
+  console.log(`Clic ${clickCount} de 5`);
+
+  // Si llegamos a 5 clics...
+  if (clickCount >= 5) {
+    // Mostrar el botón
+    botonSecreto.style.display = 'inline-block';
+
+    // Ocultarlo después de 5 segundos
+    setTimeout(() => {
+      botonSecreto.style.display = 'none';
+      clickCount = 0; // Reiniciar contador
+    }, 5000);
+
+    // Reiniciar también después de mostrar
+    clickCount = 0;
+  }
+});
