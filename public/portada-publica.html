@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MotoApp - Portada Pública</title>
-  <link rel="stylesheet" href="portada-publica.css">
+  <link rel="stylesheet" href="portada-publica.css" />
 </head>
 <body>
+
   <!-- Encabezado -->
   <header class="header">
     <div id="dashboard-button-container" class="dashboard-button-container"></div>
   </header>
 
-  <!-- Contenedor principal -->
-  <div class="portada-container">
-    <!-- Imagen izquierda -->
+  <!-- Contenido principal -->
+  <main class="portada-container">
+
+    <!-- Imagen destacada -->
     <div class="imagen-izquierda">
       <img src="" alt="Fondo" class="imagen-normal" id="imagen-secreta">
     </div>
 
-    <!-- Título y subtítulo -->
+    <!-- Texto principal -->
     <div class="texto-contenido">
       <h1 class="fondo-titulo">Cargando...</h1>
       <p class="fondo-subtitulo">Cargando...</p>
     </div>
 
-    <!-- Botones debajo de la imagen -->
+    <!-- Botones de navegación -->
     <div class="botones-container">
       <a href="contacto-publico.html" class="btn btn-secondary">Contacto</a>
       <a href="/motos-public.html" class="btn btn-primary">Muestra</a>
       <a href="/videos-public.html" class="btn btn-primary">Videos</a>
     </div>
-  </div>
 
-  <!-- Pie de página discreto -->
+  </main>
+
+  <!-- Pie de página -->
   <footer class="footer">
     <a href="/login.html" class="login-link-oculto" id="boton-secreto">Iniciar Sesión</a>
   </footer>
 
+  <!-- Script dinámico -->
   <script src="portada-publicaF.js"></script>
 </body>
 </html>
