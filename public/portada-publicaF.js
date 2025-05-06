@@ -111,3 +111,32 @@ imagenSecreta.addEventListener('click', () => {
     clickCount = 0;
   }
 });
+
+/*Funcion cambiar tema */
+
+// === Script para el cambio de tema ===
+const toggleBtn = document.getElementById('theme-toggle');
+const body = document.body;
+
+// Verifica si hay una preferencia guardada en localStorage
+const currentTheme = localStorage.getItem("theme");
+
+// Aplica el tema guardado al cargar la página
+if (currentTheme === "light") {
+  body.classList.add("light-mode");
+  toggleBtn.textContent = "☀️ Modo Claro";
+}
+
+// Función para cambiar el tema
+toggleBtn.addEventListener("click", () => {
+  body.classList.toggle("light-mode");
+
+  // Si tiene la clase light-mode, es modo claro
+  if (body.classList.contains("light-mode")) {
+    localStorage.setItem("theme", "light");
+    toggleBtn.textContent = "☀️ Modo Claro";
+  } else {
+    localStorage.setItem("theme", "dark");
+    toggleBtn.textContent = "🌙 Modo Oscuro";
+  }
+});
