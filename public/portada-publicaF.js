@@ -1,5 +1,5 @@
 // Datos simulados (opcional para prueba)
-const catalogoSimulado = [
+/*const catalogoSimulado = [
   {
     id: 1,
     marca: "Yamaha",
@@ -30,11 +30,11 @@ const catalogoSimulado = [
     modelo: "Panigale V4",
     imagen: "/imagenes/motos/panigale-v4.jpg"
   }
-];
+];*/
 
 // Tabla principal del catálogo
-let tabla_catalogo = [...catalogoSimulado]; // 👈 Usar datos simulados por ahora
-// let tabla_catalogo = []; // 👈 Descomenta esto cuando uses API
+//let tabla_catalogo = [...catalogoSimulado]; // 👈 Usar datos simulados por ahora
+ let tabla_catalogo = []; // 👈 Descomenta esto cuando uses API
 
 // Cargar la portada existente
 async function loadPortada() {
@@ -98,40 +98,56 @@ function displayPortada(portada) {
 
 // === Carrusel estilo cinta (horizontal, continuo e infinito) ===
 function startInfiniteCarousel() {
+  // Obtiene el contenedor donde se insertarán las motos (con id="carouselTrack")
   const track = document.getElementById("carouselTrack");
-  track.innerHTML = ""; // Limpiar contenido previo
 
+  // Limpia cualquier contenido previo del carrusel para empezar desde cero
+  track.innerHTML = "";
+
+  // Si no hay motos en tabla_catalogo, muestra mensaje de "No hay motos"
   if (!tabla_catalogo.length) {
     const emptyText = document.createElement("p");
     emptyText.className = "carousel-empty-text";
     emptyText.textContent = "No hay motos disponibles.";
     track.appendChild(emptyText);
-    return;
+    return; // Detiene la función si no hay datos
   }
 
-  // Duplicar contenido para efecto infinito
+  // Crea un nuevo array duplicado con todas las motos para lograr el efecto infinito.
+  // Esto significa que cuando termina una vuelta, parece que continúa sin saltos.
   const duplicados = [...tabla_catalogo, ...tabla_catalogo];
 
-  // Insertar tarjetas en el carrusel
+  // Recorre cada moto (incluyendo los duplicados) para crear su tarjeta
   duplicados.forEach(moto => {
+    // Valida que la moto tenga imagen, marca y modelo antes de mostrarla
     if (!moto.imagen || !moto.marca || !moto.modelo) {
       console.warn("Motocicleta incompleta, omitiendo:", moto);
-      return;
+      return; // Saltea esta moto si falta algún campo importante
     }
 
+    // Crea un div que representa la tarjeta de una moto
     const card = document.createElement("div");
-    card.className = "carousel-card";
+    card.className = "carousel-card"; // Clase CSS para estilos
 
+    // Inserta dentro de la tarjeta:
+    // - Una imagen con src dinámico
+    // - Un párrafo con marca + modelo
     card.innerHTML = `
       <img src="${moto.imagen}" alt="${moto.marca} ${moto.modelo}">
       <p class="carousel-marca-modelo">${moto.marca} ${moto.modelo}</p>
     `;
 
+    // Añade la tarjeta al carrusel
     track.appendChild(card);
   });
 
-  // Ajustar ancho total del carrusel
-  const itemWidth = 200 + 15; // Ancho + gap
+  // Calcula el ancho total del carrusel sumando:
+  // - El ancho de cada tarjeta (200px)
+  // - El espacio entre ellas (15px)
+  const itemWidth = 200 + 15; // Puedes cambiar estos valores según tu diseño
+
+  // Establece el ancho total del carrusel usando JavaScript
+  // Es necesario para que la animación funcione correctamente
   track.style.width = `${itemWidth * duplicados.length}px`;
 }
 
