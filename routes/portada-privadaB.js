@@ -43,8 +43,7 @@ try {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         titulo TEXT NOT NULL,
         subtitulo TEXT NOT NULL,
-        fondo BLOB,
-        banner BLOB
+        fondo BLOB
       );
     `);
     console.log('[DEPURACIÓN] Tabla "tabla_portada" creada correctamente.');
@@ -55,8 +54,6 @@ try {
   console.error('[ERROR] Error al verificar o crear la tabla "tabla_portada":', error.message);
   process.exit(1);
 }
-
-
 
 // Obtener la portada actual
 router.get('/', (req, res) => {
@@ -73,7 +70,6 @@ router.get('/', (req, res) => {
       titulo: portada.titulo,
       subtitulo: portada.subtitulo,
       fondo: portada.fondo ? `data:image/jpeg;base64,${Buffer.from(portada.fondo).toString('base64')}` : null,
-      banner: portada.banner ? `data:image/jpeg;base64,${Buffer.from(portada.banner).toString('base64')}` : null,
     };
 
     res.json(formattedPortada);
@@ -85,7 +81,7 @@ router.get('/', (req, res) => {
 
 // Crear o actualizar la portada
 router.post('/', (req, res) => {
-  const { titulo, subtitulo, fondo, banner } = req.body;
+  const { titulo, subtitulo, fondo } = req.body;
 
   if (!titulo || !subtitulo) {
     return res.status(400).json({ error: 'Todos los campos son requeridos.' });
@@ -95,25 +91,25 @@ router.post('/', (req, res) => {
     return res.status(400).json({ error: 'La imagen de fondo debe ser un Base64 válido.' });
   }
 
-  if (banner && !banner.startsWith('data:image/')) {
-    return res.status(400).json({ error: 'La imagen de banner debe ser un Base64 válido.' });
-  }
-
   try {
+    // ✅ Validación: solo puede haber una portada
+    const existing = db.prepare('SELECT * FROM tabla_portada LIMIT 1').get();
+    if (existing) {
+      return res.status(400).json({ error: 'Ya existe una portada. Solo puede haber una.' });
+    }
+
     const sql = `
-      INSERT INTO tabla_portada (titulo, subtitulo, fondo, banner)
-      VALUES (?, ?, ?, ?)
+      INSERT INTO tabla_portada (titulo, subtitulo, fondo)
+      VALUES (?, ?, ?)
       ON CONFLICT(id) DO UPDATE SET
         titulo = excluded.titulo,
         subtitulo = excluded.subtitulo,
-        fondo = excluded.fondo,
-        banner = excluded.banner;
+        fondo = excluded.fondo;
     `;
     db.prepare(sql).run(
       titulo,
       subtitulo,
-      fondo ? Buffer.from(fondo.split(',')[1], 'base64') : null,
-      banner ? Buffer.from(banner.split(',')[1], 'base64') : null
+      fondo ? Buffer.from(fondo.split(',')[1], 'base64') : null
     );
 
     res.json({ mensaje: 'Portada guardada exitosamente.' });
@@ -126,9 +122,9 @@ router.post('/', (req, res) => {
 // Actualizar la portada
 router.put('/:id', (req, res) => {
   const { id } = req.params;
-  const { titulo, subtitulo, fondo, banner } = req.body;
+  const { titulo, subtitulo, fondo } = req.body;
 
-  if (!titulo && !subtitulo && !fondo && !banner) {
+  if (!titulo && !subtitulo && !fondo) {
     return res.status(400).json({ error: 'Debes proporcionar al menos un campo para actualizar.' });
   }
 
@@ -151,13 +147,6 @@ router.put('/:id', (req, res) => {
       }
       updates.push('fondo = ?');
       params.push(Buffer.from(fondo.split(',')[1], 'base64'));
-    }
-    if (banner) {
-      if (!banner.startsWith('data:image/')) {
-        return res.status(400).json({ error: 'La imagen de banner debe ser un Base64 válido.' });
-      }
-      updates.push('banner = ?');
-      params.push(Buffer.from(banner.split(',')[1], 'base64'));
     }
 
     if (updates.length === 0) {
