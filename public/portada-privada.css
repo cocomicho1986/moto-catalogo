@@ -1,169 +1,159 @@
-/* Estilos generales */
-body {
-  font-family: Arial, sans-serif;
+/* Reset básico */
+* {
   margin: 0;
   padding: 0;
-  background-color: #f4f4f9;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f7f9fc;
   color: #333;
+  padding: 1rem;
 }
 
 .header {
-  display: flex; /* Usamos Flexbox para alinear elementos */
-  justify-content: space-between; /* Separamos "Regresar" (izquierda) y "Dashboard" (derecha) */
-  align-items: center; /* Alineamos verticalmente ambos elementos */
-  width: 100%; /* Ancho completo del encabezado */
-  background-color: #000; /* Fondo negro */
-  padding: 10px; /* Espaciado interno */
-}
-
-.header h2 {
-  margin: 0; /* Quitamos márgenes por defecto del h2 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  padding: 6px 12px;
+  margin-bottom: 1rem;
 }
 
 .header h2 a {
-  text-decoration: none; /* Quitamos el subrayado del enlace */
-  color: #fff; /* Color blanco para el texto del enlace */
-  font-size: 1rem; /* Tamaño moderado */
-  font-weight: bold; /* Negrita para destacar */
-  transition: color 0.3s ease; /* Efecto hover suave */
+  text-decoration: none;
+  color: white;
+  font-size: 0.95rem;
 }
 
 .header h2 a:hover {
-  color: #ccc; /* Cambio de color al pasar el mouse */
-  text-decoration: underline; /* Subrayado al hacer hover */
+  color: #ccc;
 }
 
 .dashboard-button-container {
-  display: flex; /* Aseguramos que el botón esté alineado correctamente */
-  visibility: hidden; /* Ocultamos el contenedor si está vacío */
+  visibility: hidden;
 }
 
 .dashboard-button-container a {
-  text-decoration: none; /* Quitamos el subrayado del enlace */
-  color: #fff; /* Color blanco para el texto del botón */
-  background-color: #ff5722; /* Color llamativo para el botón */
-  padding: 8px 16px; /* Espaciado interno */
-  border-radius: 5px; /* Bordes redondeados */
-  font-size: 0.9rem; /* Tamaño moderado */
-  font-weight: bold; /* Negrita para destacar */
-  transition: all 0.3s ease; /* Efecto hover suave */
+  text-decoration: none;
+  color: white;
+  background-color: #ff5722;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
 }
 
-.dashboard-button-container a:hover {
-  background-color: #e64a19; /* Cambio de color al pasar el mouse */
-  transform: scale(1.05); /* Efecto de escala al hacer hover */
-}
-
-/* Mostrar el contenedor solo si tiene contenido */
 .dashboard-button-container:not(:empty) {
   visibility: visible;
 }
 
-/* Resto de los estilos */
-form {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-input[type="text"],
-input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-button {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.preview img {
-  max-width: 100%;
-  height: auto;
-  margin-top: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.actions {
-  margin-top: 20px;
+.main-container {
   display: flex;
-  gap: 10px;
-}
-
-.actions button {
-  flex: 1;
-}
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: #f9f9f9;
-}
-form {
-  max-width: 600px;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
 }
-label {
+
+.form-container {
+  flex: 1;
+  min-width: 280px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.preview-container {
+  flex: 1;
+  min-width: 280px;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-left: 1px solid #ddd;
+}
+
+form label {
   display: block;
-  margin-top: 15px;
-  font-weight: bold;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
-input[type="text"], input[type="file"] {
+
+form input[type="text"],
+form input[type="file"] {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
+  padding: 0.4rem;
+  margin-top: 0.2rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
+  font-size: 0.9rem;
 }
+
+.form-buttons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
 button {
-  margin-top: 20px;
-  padding: 10px;
+  padding: 0.5rem 0.8rem;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
+  font-size: 0.9rem;
   cursor: pointer;
 }
+
 button:hover {
   background-color: #0056b3;
 }
-.preview img {
-  max-width: 100%;
-  height: auto;
-  margin-top: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
+
 .actions {
-  margin-top: 20px;
+  margin-top: 1rem;
   display: flex;
-  gap: 10px;
+  gap: 0.5rem;
 }
+
 .actions button {
-  flex: 1;
+  background-color: #dc3545;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+}
+
+.actions button:hover {
+  background-color: #c82333;
+}
+
+.portada-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.portada-card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.portada-card p {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.portada-card img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-bottom: 0.8rem;
+}
+
+.portada-card button {
+  align-self: center;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
 }

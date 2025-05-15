@@ -23,16 +23,17 @@ function displayPortada(portada) {
     return;
   }
 
+  // Escapamos comillas simples para evitar errores en cadenas
+  const safeTitulo = portada.titulo.replace(/'/g, "\\'");
+  const safeSubtitulo = portada.subtitulo.replace(/'/g, "\\'");
+  const safeFondo = portada.fondo ? portada.fondo.replace(/'/g, "\\'") : '';
+
   const html = `
-    <div>
+    <div class="portada-card">
       <h2>${portada.titulo}</h2>
       <p>${portada.subtitulo}</p>
-      <div>
-        <strong>Fondo:</strong>
-        ${portada.fondo ? `<img src="${portada.fondo}" alt="Fondo" style="max-width: 300px;">` : '<p>No hay imagen de fondo cargada.</p>'}
-      </div>
-      
-      <button onclick="editPortada(${portada.id}, '${portada.titulo}', '${portada.subtitulo}', '${portada.fondo}')">Editar</button>
+      ${portada.fondo ? `<img src="${portada.fondo}" alt="Fondo" style="max-width: 100%; border-radius: 6px; margin-bottom: 1rem;">` : ''}
+      <button onclick="editPortada(${portada.id}, '${safeTitulo}', '${safeSubtitulo}', '${safeFondo}')">Editar</button>
     </div>
   `;
   container.innerHTML = html;
